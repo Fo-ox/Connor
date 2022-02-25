@@ -1,0 +1,7 @@
+<div class="message">
+    <div class="message__box">
+        <app-avatar class="message__box__avatar" [avatarUrl]="avatarUrl"></app-avatar>
+        <p class="message__box__content">{{chatContent.messageText}}</p>
+    </div>
+    <div class="message__time">{{chatContent.messageTime | date: 'HH:mm'}}</div>
+</div>

@@ -1,0 +1,17 @@
+.font-face(@file-name, @font-family, @font-weight, @font-style: normal) {
+    @font-face {
+        font-family: @font-family;
+        src: url('../fonts/@{file-name}.woff2') format('woff2');
+        font-weight: @font-weight;
+        font-style: @font-style;
+        font-display: fallback;
+    }
+}
+
+.font-face(Manrope-ExtraLight, Manrope, 200);
+.font-face(Manrope-Light, Manrope, 300);
+.font-face(Manrope-Regular, Manrope, 400);
+.font-face(Manrope-Medium, Manrope, 500);
+.font-face(Manrope-SemiBold, Manrope, 600);
+.font-face(Manrope-Bold, Manrope, 700);
+.font-face(Manrope-ExtraBold, Manrope, 800);

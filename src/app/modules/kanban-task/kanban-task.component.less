@@ -1,0 +1,69 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.kanban-task {
+    padding: @items-max-space;
+    background-color: @c-kanban-task-background;
+    width: @kanban-task-width;
+    border-radius: @base-border-radius;
+
+    cursor: pointer;
+    .card-container;
+
+    &._active {
+        border: @card-border_active;
+        box-shadow: @card-box-shadow;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: @space-x2;
+        min-height: @parameter-icon-size;
+
+        &__id {
+            .font-11-semibold;
+            color: @c-additional-text;
+        }
+
+        &__more-action {
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        display: flex;
+        .font-15-extrabold;
+        color: @c-main-text;
+        margin-bottom: @block-space;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__user {
+            display: flex;
+            color: @c-additional-text;
+        }
+
+        &__task-priority {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: @base-border-radius;
+            width: @parameter-icon-size;
+            height: @parameter-icon-size;
+
+            &__task-type {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+

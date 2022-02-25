@@ -1,0 +1,88 @@
+@import "../../assets/styles/vars";
+@import "../../assets/styles/color";
+@import "../../assets/styles/fonts";
+
+.parameter-type {
+    display: flex;
+    align-items: center;
+
+    &__container {
+        width: @parameter-icon-size;
+        height: @parameter-icon-size;
+        border-radius: @base-border-radius;
+        background: @c-icon-default-background;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: @c-icon-default-color;
+
+        &__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__value {
+        .font-13-extrabold;
+        color: @c-main-text;
+        margin-left: @items-min-space;
+    }
+}
+
+.parameter-priority {
+    display: flex;
+    width: min-content;
+    align-items: center;
+    justify-content: center;
+    padding: 0 @items-min-space;
+    border-radius: @parameter-border-radius;
+
+    &__value {
+        display: block;
+        .font-13-extrabold;
+    }
+}
+
+.parameter-empty {
+    .font-13-regular;
+    letter-spacing: -2px;
+    color: @c-additional-text;
+}
+
+.parameter-user {
+    display: flex;
+
+    &__icon {
+        margin-right: @items-min-space;
+        width: @parameter-icon-size;
+        height: @parameter-icon-size;
+    }
+
+    &__name {
+        .font-13-extrabold;
+        color: @c-main-text;
+    }
+}
+
+.parameter-value {
+    color: @c-main-text;
+    .font-13-extrabold;
+}
+
+.parameter-date {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+
+    &__date {
+        .font-13-extrabold;
+        color: @c-main-text;
+        margin-right: @items-min-space;
+    }
+
+    &__time {
+        .font-11-extrabold;
+        color: @c-additional-text;
+    }
+}

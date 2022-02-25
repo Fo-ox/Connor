@@ -1,0 +1,22 @@
+<svg-icon class="more-tooltip__trigger"
+          tuiHintMode="onDark"
+          *ngIf="items?.length"
+          [tuiHint]="content"
+          [tuiHintShowDelay]="100"
+          [tuiHintHideDelay]="100"
+          [tuiHintDirection]="'right'"
+          [key]="'more'"
+          [size]="'sm'"
+></svg-icon>
+
+<ng-template #content>
+    <div class="more-tooltip__content">
+        <ng-container *ngFor="let item of items">
+            <div class="more-tooltip__content__item"
+                 (tap)="selectItem.emit(item)"
+            >
+                {{ item.displayName }}
+            </div>
+        </ng-container>
+    </div>
+</ng-template>

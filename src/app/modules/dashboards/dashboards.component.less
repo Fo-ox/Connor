@@ -1,0 +1,100 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.dashboard {
+    background-color: @c-base-background;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .scroll-content;
+        .content-full-wrap;
+        padding-top: @block-space;
+
+        &__rows {
+            flex: 1;
+            height: 100%;
+
+            &__row {
+                display: block;
+                box-sizing: border-box;
+                padding-bottom: @db-kanban-row-space;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &__dialog-trigger {
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+    }
+
+    &__empty {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &__title {
+            color: @c-additional-text;
+            .font-32-extrabold;
+        }
+
+        &__create-button {
+            .button-primary;
+            .font-13-bold;
+            color: @c-main-text;
+            cursor: pointer;
+            margin-top: @items-max-space;
+        }
+    }
+}
+
+._scroll-container {
+    .scroll-container;
+}
+
+// выносим потом в другой компонент для создания проекта
+.create_project {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+    }
+    &__detail {
+        display: flex;
+        align-items: center;
+
+        &__name {
+            display: flex;
+            .button-outline(@width: 30px);
+            &__input{
+            }
+        }
+
+        &__type {
+            display: flex;
+        }
+
+        &__priority {
+            display: flex;
+        }
+    }
+}
+

@@ -1,0 +1,149 @@
+@default-font-family:               Manrope, sans-serif;
+@default-font-size:                 13px;
+@default-line-height:               20px;
+@default-letter-spacing:            -0.0025em;
+@default-font-weight:               400;
+@default-font-style:                normal;
+
+@medium-font-weight:                500;
+@semibold-font-weight:              600;
+@bold-font-weight:                  700;
+@extrabold-font-weight:             800;
+@black-font-weight:                 900;
+
+.font-construct(
+    @font-size:          @default-font-size,
+    @line-height:        @default-line-height,
+    @letter-spacing:     @default-letter-spacing,
+    @font-weight:        @default-font-weight,
+    @font-style:         @default-font-style,
+    @font-family:        @default-font-family) {
+    font-family:     @font-family;
+    font-size:       @font-size;
+    font-style:      @font-style;
+    font-weight:     @font-weight;
+    line-height:     @line-height;
+    letter-spacing:  @letter-spacing;
+}
+
+.font-11-regular() {
+    .font-construct(11px, 15px, 0.03em);
+}
+.font-11-medium() {
+    .font-11-regular;
+    font-weight: @medium-font-weight;
+}
+.font-11-semibold() {
+    .font-11-regular;
+    font-weight: @semibold-font-weight;
+}
+.font-11-extrabold() {
+    .font-11-regular;
+    font-weight: @extrabold-font-weight;
+}
+
+.font-12-regular() {
+    .font-construct(12px, 16px, 0);
+}
+.font-12-medium() {
+    .font-12-regular;
+    font-weight: @medium-font-weight;
+}
+.font-12-semibold() {
+    .font-12-regular;
+    font-weight: @semibold-font-weight;
+}
+
+.font-13-regular() {
+    .font-construct();
+}
+.font-13-medium() {
+    .font-13-regular;
+    font-weight: @medium-font-weight;
+}
+.font-13-semibold() {
+    .font-13-regular;
+    font-weight: @semibold-font-weight;
+}
+.font-13-bold() {
+    .font-13-regular;
+    font-weight: @bold-font-weight;
+}
+.font-13-extrabold() {
+    .font-13-regular;
+    font-weight: @extrabold-font-weight;
+}
+
+.font-13-regular-italic() {
+    .font-13-regular;
+    font-style: italic;
+}
+
+.font-15-regular() {
+    .font-construct(15px, 24px, -0.009em);
+}
+.font-15-medium() {
+    .font-15-regular;
+    font-weight: @medium-font-weight;
+}
+.font-15-semibold() {
+    .font-15-regular;
+    font-weight: @semibold-font-weight;
+}
+.font-15-extrabold() {
+    .font-15-regular;
+    font-weight: @extrabold-font-weight;
+}
+
+.font-19-regular() {
+    .font-construct(19px, 28px, -0.014em);
+}
+.font-19-medium() {
+    .font-19-regular;
+    font-weight: @medium-font-weight;
+}
+.font-19-semibold() {
+    .font-19-regular;
+    font-weight: @semibold-font-weight;
+}
+.font-19-extrabold() {
+    .font-19-regular;
+    font-weight: @extrabold-font-weight;
+}
+
+.font-20-regular() {
+    .font-construct(20px, 28px, -0.017em);
+}
+.font-20-medium() {
+    .font-20-regular;
+    font-weight: @medium-font-weight;
+}
+.font-20-semibold() {
+    .font-20-regular;
+    font-weight: @semibold-font-weight;
+}
+
+.font-24-regular() {
+    .font-construct(24px, 32px, -0.019em);
+}
+.font-24-semibold() {
+    .font-24-regular;
+    font-weight: @semibold-font-weight;
+}
+
+.font-24-black() {
+    .font-24-regular;
+    font-weight: @black-font-weight;
+}
+
+.font-32-regular() {
+    .font-construct(32px, 40px, -0.021em);
+}
+.font-32-semibold() {
+    .font-32-regular;
+    font-weight: @semibold-font-weight;
+}
+.font-32-extrabold() {
+    .font-32-regular;
+    font-weight: @extrabold-font-weight;
+}

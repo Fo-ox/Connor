@@ -1,0 +1,79 @@
+<ng-container *ngIf="{
+    viewSearchResult: viewSearchResult$ | async,
+    searchedItems: findItems$ | async
+} as async">
+
+<tui-hosted-dropdown
+    class="search"
+    [content]="searchContent"
+    [open]="async.viewSearchResult"
+>
+    <div class="search__input">
+        <tui-primitive-textfield
+            class="search__input__tui"
+            [value]="searchValue"
+            [tuiTextfieldType]="'text'"
+            [tuiTextfieldSize]="'m'"
+            (valueChange)="onSearchValueChange($event)"
+            (focusedChange)="onFocusChange($event)"
+        >
+            <p>Search value</p>
+            <ng-content></ng-content>
+        </tui-primitive-textfield>
+        <svg-icon [key]="'search'"></svg-icon>
+    </div>
+</tui-hosted-dropdown>
+
+<ng-template #searchContent>
+    <div class="search__find-items">
+        <div class="search__find-items__dashboards"
+             *ngIf="async.searchedItems?.dashboards?.length"
+        >
+            <p class="search__find-items__dashboards__title">Dashboards</p>
+            <div class="search__find-items__dashboards__item"
+                 *ngFor="let dashboard of async.searchedItems.dashboards"
+                 (tap)="onDashboardNavigate(dashboard)"
+            >
+                <svg-icon class="search__find-items__dashboards__item__icon"
+                          [key]="'dashboard'"
+                          [size]="'md'"
+                ></svg-icon>
+                <p class="search__find-items__dashboards__item__text">
+                    {{ dashboard.projectTitle }}
+                </p>
+            </div>
+        </div>
+
+        <div class="search__find-items__tasks"
+             *ngIf="async.searchedItems?.tasks?.length"
+        >
+            <p class="search__find-items__tasks__title">Tasks</p>
+            <div class="search__find-items__tasks__item"
+                 *ngFor="let task of async.searchedItems.tasks"
+                 (tap)="onTaskNavigate(task)"
+            >
+                <div class="search__find-items__tasks__item__icon"
+                     [style.backgroundColor]="dictionaries?.priority?.[task.priority]?.icon?.backgroundColor || DEFAULT_ICON_BACKGROUND"
+                >
+                    <svg-icon class="search__find-items__tasks__item__icon__svg"
+                              [key]="dictionaries?.type?.[task.type]?.icon?.name || DEFAULT_ICON_NAME"
+                              [color]="dictionaries?.priority?.[task.priority]?.icon?.color || DEFAULT_ICON_COLOR"
+                              [size]="'xs'"
+                    ></svg-icon>
+                </div>
+                <div class="search__find-items__tasks__item__text">
+                    <p class="search__find-items__tasks__item__text__title">{{ task?.title }}</p>
+                    <p class="search__find-items__tasks__item__text__code">{{ task.code?.padStart(10, '0') }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="search__find-items__empty"
+             *ngIf="!async.searchedItems?.tasks?.length && !async.searchedItems?.dashboards?.length"
+        >
+            <div class="search__find-items__empty__text"> No search result =(</div>
+        </div>
+    </div>
+</ng-template>
+
+</ng-container>

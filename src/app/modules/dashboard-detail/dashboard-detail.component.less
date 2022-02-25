@@ -1,0 +1,30 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.dashboard-detail {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__content {
+        height: 100%;
+        display: flex;
+
+        &__task-detail {
+            flex: 1;
+            border-right: @component-border;
+        }
+
+        &__kanban {
+            flex: 3;
+        }
+    }
+
+    &__dialog-trigger {
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+    }
+}

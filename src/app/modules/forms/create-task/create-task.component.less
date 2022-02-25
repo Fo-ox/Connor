@@ -1,0 +1,120 @@
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/color";
+@import "../../../../assets/styles/fonts";
+
+::ng-deep {
+    tui-wrapper[data-appearance='textfield'] {
+        box-shadow: none;
+        &:hover {
+            box-shadow: none;
+        }
+        &:after {
+            border: none;
+            &:hover {
+                border: none;
+            }
+        }
+    }
+}
+
+.create-task {
+    &__title {
+        .font-19-medium;
+        color: @c-main-text;
+        margin-bottom: @block-space;
+    }
+
+    &__group {
+
+        &__title {
+            .font-15-extrabold;
+            color: @c-main-text;
+            margin-bottom: @items-min-space;
+        }
+
+        &__select {
+            display: flex;
+            justify-content: space-between;
+
+            &__control {
+                width: 160px;
+                margin: @items-min-space 0;
+                border: @input-border;
+                border-radius: @base-border-radius;
+                height: fit-content;
+
+                &._error {
+                    border: @input-border_error;
+                    .transition;
+                }
+            }
+        }
+
+
+        &__name {
+            border: @input-border;
+            .transition;
+
+            &._error {
+                border: @input-border_error;
+                .transition;
+            }
+        }
+
+        &__name-error {
+            display: block;
+            .font-11-medium;
+            color: @accent-flame;
+            padding-top: @item-flex-gap;
+            padding-left: @input-errors-space;
+        }
+
+        &__team {
+            display: block;
+            margin: @items-min-space 0;
+            border: @input-border;
+            border-radius: @base-border-radius;
+        }
+
+        &__comments {
+            border: @input-border;
+            .transition;
+        }
+    }
+
+    &__actions {
+        margin-top: @block-space;
+        display: flex;
+
+        &__create-button {
+            .button-primary;
+            .font-13-bold;
+            color: @c-main-text;
+            cursor: pointer;
+            margin-right: @items-min-space;
+        }
+        &__close-button {
+            .button-secondary;
+            .font-13-bold;
+            color: @c-additional-text;
+            cursor: pointer;
+        }
+    }
+
+    &__select {
+        &__title {
+            .font-11-medium;
+            color: @c-main-text;
+        }
+        &__content {
+            display: flex;
+            flex-wrap: wrap;
+
+            &__item {
+                padding: 0 @items-max-space @item-flex-gap 0;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

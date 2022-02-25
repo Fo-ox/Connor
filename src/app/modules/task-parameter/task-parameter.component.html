@@ -1,0 +1,50 @@
+<ng-container *ngIf="{
+    valueContext: valueContext$ | async,
+    valueTemplate: valueTemplate$ | async,
+    emptyTemplate: emptyTemplate$ | async,
+    systemUser: systemUser$ | async
+} as async">
+
+<div class="task-parameter">
+    <p class="task-parameter__key">
+        {{ parameterKey }}
+    </p>
+    <div class="task-parameter__value">
+
+        <ng-container *ngIf="!editable else editableParameter">
+            <ng-container *ngIf="async.valueContext else emptyValue">
+                <ng-container *ngTemplateOutlet="async.valueTemplate; context: {data: async.valueContext}"
+                ></ng-container>
+            </ng-container>
+        </ng-container>
+
+        <ng-template #editableParameter>
+            <tui-select
+                class="task-parameter__value__select"
+                [tuiTextfieldSize]="'s'"
+                [ngModel]="async.valueContext || ''"
+                (ngModelChange)="onParameterValueChanges($event)"
+                [valueContent]="async.valueContext ? valueTemplate : emptyValue"
+            >
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="valueItems"
+                    [itemContent]="valueTemplate"
+                ></tui-data-list-wrapper>
+
+            </tui-select>
+        </ng-template>
+
+        <ng-template #emptyValue>
+            <ng-container *ngTemplateOutlet="async.emptyTemplate"
+            ></ng-container>
+        </ng-template>
+
+        <ng-template #valueTemplate let-data>
+            <ng-container *ngTemplateOutlet="async.valueTemplate; context: {data: data}"></ng-container>
+        </ng-template>
+
+    </div>
+</div>
+
+</ng-container>

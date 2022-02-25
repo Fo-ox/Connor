@@ -1,0 +1,35 @@
+<ng-container *ngIf="{
+    chat: chat$ | async,
+    chatLists: chatLists$ | async,
+    user: user$ | async
+} as async">
+
+<div class="dialog">
+    <app-navigation></app-navigation>
+    <div class="dialog__board">
+
+        <div class="dialog__board__sidebar">
+            <app-sidebar
+                [ChatLists]="async.chatLists"
+            ></app-sidebar>
+        </div>
+
+        <app-chatdetail
+            class="dialog__board__detail"
+            *ngIf="async.chat; else selectChat"
+            [chat]="async.chat"
+            [user]="async.user"
+        ></app-chatdetail>
+
+    </div>
+</div>
+
+<ng-template #selectChat>
+    <div class="dialog__select">
+        <h2 class="dialog__select__title">Select Chat</h2>
+    </div>
+</ng-template>
+
+</ng-container>
+
+

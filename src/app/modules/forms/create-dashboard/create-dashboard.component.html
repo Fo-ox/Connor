@@ -1,0 +1,87 @@
+<ng-container *ngIf="{
+    loading: loading$ | async,
+    userTemplate: userTemplate$ | async,
+    currentUser: currentUser$ | async,
+    searchedUsers: searchedUsers$ | async
+} as async">
+
+<form [formGroup]="formGroup" class="create-dashboard">
+    <h2 class="create-dashboard__title">{{ initialValues ? 'Update Dashboard' : 'Create Dashboard'}}</h2>
+    <div class="create-dashboard__group">
+        <p class="create-dashboard__group__title">Dashboard details</p>
+
+        <tui-input
+            class="create-dashboard__group__name"
+            formControlName="name"
+            [class._error]="formGroup.controls.name.errors && formGroup.controls.name.touched"
+            [tuiTextfieldSize]="'m'"
+        >
+            Name*
+        </tui-input>
+
+        <div class="create-dashboard__group__name-error"
+             *ngIf="formGroup.controls.name.errors && formGroup.controls.name.touched"
+        >
+            field is required
+        </div>
+
+        <tui-multi-select
+            class="create-dashboard__group__team"
+            formControlName="team"
+            [tuiTextfieldSize]="'m'"
+            [tuiTextfieldLabelOutside]="true"
+            [valueContent]="selectContent"
+            [stringify]="stringify"
+            (searchChange)="onUsersSearch($event)"
+        >
+            <p>Dashboard team</p>
+            <tui-data-list-wrapper
+                *tuiDataList tuiMultiSelectGroup
+                [items]="async.searchedUsers"
+                [itemContent]="content"
+            ></tui-data-list-wrapper>
+
+        </tui-multi-select>
+    </div>
+
+    <div class="create-dashboard__actions">
+        <tui-loader [showLoader]="async.loading">
+            <button class="create-dashboard__actions__create-button"
+                    [disabled]="async.loading"
+                    (tap)="onCreateAndUpdate()"
+            >
+                {{ initialValues ? 'Update' : 'Create'}}
+            </button>
+        </tui-loader>
+
+        <button class="create-dashboard__actions__close-button"
+                [disabled]="async.loading"
+                (tap)="cancelEvent.emit(true)"
+        >
+            Close
+        </button>
+    </div>
+
+</form>
+
+<ng-template #content let-data>
+    <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: data}"></ng-container>
+</ng-template>
+
+<ng-template #selectContent let-data>
+    <div class="create-dashboard__select">
+        <p class="create-dashboard__select__title">Dashboard team</p>
+        <div class="create-dashboard__select__content">
+            <div class="create-dashboard__select__content__item">
+                <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: async.currentUser}"></ng-container>
+            </div>
+            <ng-container *ngFor="let user of data; let index">
+                <div class="create-dashboard__select__content__item">
+                    <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+</ng-container>

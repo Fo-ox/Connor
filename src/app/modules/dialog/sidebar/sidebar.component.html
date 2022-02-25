@@ -1,0 +1,24 @@
+<div class="sidebar">
+    <tui-scrollbar class="scroll-container">
+        <div class="sidebar__content">
+            <app-chatlist
+                class="sidebar__content__chat-items"
+                *ngFor="let chatList of ChatLists"
+                [chatList]="chatList"
+                [lastMessage]="(lastMessages$ | async)?.[chatList?.chartId]"
+                (tap)="onSelectTask(chatList?.chartId)"
+            ></app-chatlist>
+        </div>
+    </tui-scrollbar>
+    <div class="sidebar__actions">
+        <button class="sidebar__actions__create-button"
+                (tap)="openDialog(createChat)"
+        >
+            Create Chat
+        </button>
+    </div>
+</div>
+
+<ng-template #createChat>
+    <create-chat (cancelEvent)="closeDialog()"></create-chat>
+</ng-template>

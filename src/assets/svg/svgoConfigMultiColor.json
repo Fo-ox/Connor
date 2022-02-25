@@ -1,0 +1,24 @@
+{
+  "generateType": "true",
+  "delimiter": "KEBAB",
+  "conversionType": "files",
+  "iconsFolderName": "svg-multi-color",
+  "interfaceName": "IMultiColorIcon",
+  "typeName": "MultiColorIcon",
+  "barrelFileName": "multi-color-icons",
+  "prefix": "cpm",
+  "srcFiles": [
+    "./src/assets/svg/source/svg-multi-color/*.svg"
+  ],
+  "outputDirectory": "./src/assets/svg",
+  "svgoConfig": {
+    "plugins": [
+      {
+        "removeDimensions": {
+          "active": true
+        }
+      }
+    ]
+  },
+  "compileSources": false
+}

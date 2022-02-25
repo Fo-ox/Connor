@@ -1,0 +1,134 @@
+<ng-container *ngIf="{
+    loading: loading$ | async,
+    userTemplate: userTemplate$ | async,
+    typeTemplate: typeTemplate$ | async,
+    priorityTemplate: priorityTemplate$ | async,
+    currentUser: currentUser$ | async,
+    searchedUsers: searchedUsers$ | async,
+    currentDashboard: currentDashboard$ | async
+} as async">
+
+    <form [formGroup]="formGroup" class="create-task">
+        <h2 class="create-task__title">Create Task</h2>
+        <div class="create-task__group">
+            <p class="create-task__group__title">Task details</p>
+
+            <tui-input
+                class="create-task__group__name"
+                formControlName="name"
+                [class._error]="formGroup.controls.name.errors && formGroup.controls.name.touched"
+                [tuiTextfieldSize]="'m'"
+            >
+                Name*
+            </tui-input>
+
+            <div class="create-task__group__name-error"
+                 *ngIf="formGroup.controls.name.errors && formGroup.controls.name.touched"
+            >
+                field is required
+            </div>
+            <div class="create-task__group__select">
+                <div>
+                    <tui-select
+                        class="create-task__group__select__control"
+                        formControlName="type"
+                        [tuiTextfieldSize]="'m'"
+                        [valueContent]="typeTemplate"
+                        [class._error]="formGroup.controls.type.errors && formGroup.controls.type.touched"
+                    >
+                        <p>Type*</p>
+                        <tui-data-list-wrapper
+                            *tuiDataList
+                            [items]="dictionaries.type"
+                            [itemContent]="typeTemplate"
+                        ></tui-data-list-wrapper>
+                    </tui-select>
+
+                    <div class="create-task__group__name-error"
+                         *ngIf="formGroup.controls.type.errors && formGroup.controls.type.touched"
+                    >
+                        field is required
+                    </div>
+                </div>
+
+                <tui-select
+                    class="create-task__group__select__control"
+                    formControlName="priority"
+                    [tuiTextfieldSize]="'m'"
+                    [valueContent]="priorityTemplate"
+                >
+                    <p>Priority</p>
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="dictionaries.priority"
+                        [itemContent]="priorityTemplate"
+                    ></tui-data-list-wrapper>
+
+                </tui-select>
+            </div>
+
+            <p class="create-task__group__title">User Settings</p>
+
+            <tui-combo-box
+                class="create-task__group__team"
+                formControlName="assignee"
+                tuiTextfieldExampleText="Type a name"
+                [valueContent]="userListTemplate"
+                [tuiTextfieldSize]="'m'"
+                [stringify]="stringify"
+                (searchChange)="onUsersSearch($event)"
+            >
+                <p>Assignee</p>
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="async.searchedUsers"
+                    [itemContent]="userListTemplate"
+                ></tui-data-list-wrapper>
+            </tui-combo-box>
+
+        </div>
+
+        <p class="create-task__group__title">Description</p>
+
+        <tui-input
+            class="create-task__group__comments"
+            formControlName="description"
+            [tuiTextfieldSize]="'m'"
+            [tuiTextfieldLabelOutside]="true"
+        >
+            <p>Type this...</p>
+        </tui-input>
+
+        <div class="create-task__actions">
+            <tui-loader [showLoader]="async.loading">
+                <button class="create-task__actions__create-button"
+                        [disabled]="async.loading"
+                        (tap)="onCreate()"
+                >
+                    Create
+                </button>
+            </tui-loader>
+
+            <button class="create-task__actions__close-button"
+                    [disabled]="async.loading"
+                    (tap)="cancelEvent.emit(true)"
+            >
+                Close
+            </button>
+        </div>
+
+    </form>
+
+    <ng-template #userListTemplate let-data>
+        <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: data}"></ng-container>
+    </ng-template>
+
+    <ng-template #priorityTemplate let-data>
+        <ng-container *ngTemplateOutlet="async.priorityTemplate; context: {data: data}"></ng-container>
+    </ng-template>
+
+    <ng-template #typeTemplate let-data>
+        <ng-container *ngTemplateOutlet="async.typeTemplate; context: {data: data}"></ng-container>
+    </ng-template>
+
+</ng-container>

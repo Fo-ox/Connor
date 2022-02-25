@@ -1,0 +1,40 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+::ng-deep {
+    tui-wrapper[data-appearance='textfield'] {
+        box-shadow: none;
+        &:hover {
+            box-shadow: none;
+        }
+        &:after {
+            border: none;
+            &:hover {
+                border: none;
+            }
+        }
+    }
+}
+
+.task-parameter {
+    display: flex;
+
+    &__key {
+        min-width: 90px;
+    }
+
+    &__value {
+        .font-13-extrabold;
+        color: @c-main-text;
+        width: 100%;
+
+        &__select {
+            height: 20px;
+            flex: 1;
+            width: calc(100% + 24px);
+            margin-top: -6px;
+            margin-left: -12px;
+        }
+    }
+}

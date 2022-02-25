@@ -1,0 +1,41 @@
+<ng-container *ngIf="{
+    loading: loading$ | async
+} as async">
+
+<div class="login">
+    <div class="login__window">
+
+        <div class="login__window__title">
+            <p>Welcome to TMS</p>
+        </div>
+
+        <form [formGroup]="formGroup" class="login__window__info">
+            <tui-input
+                class="login__window__info__input"
+                formControlName="login"
+                [class._error]="formGroup.controls.login.errors && formGroup.controls.login.touched"
+                [tuiTextfieldSize]="'m'"
+            >Login</tui-input>
+
+            <tui-input-password
+                class="login__window__info__input"
+                formControlName="password"
+                [class._error]="formGroup.controls.password.errors && formGroup.controls.password.touched"
+                [tuiTextfieldSize]="'m'"
+            >Password</tui-input-password>
+
+            <div class="login__window__info__invalid" [class.hidden]="!invalid">
+                <span> invalid login or password </span>
+            </div>
+        </form>
+
+        <div class="login__window__button">
+            <tui-loader [showLoader]="async.loading">
+                <button [disabled]="async.loading" (tap)="onLogin()">Login</button>
+            </tui-loader>
+        </div>
+
+    </div>
+</div>
+
+</ng-container>

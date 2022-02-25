@@ -1,0 +1,27 @@
+<ng-container *ngIf="{
+    activeTask: activeTask$ | async,
+    tasks: tasks$ | async,
+    dashboard: dashboard$ | async,
+    user: user$ | async
+} as async">
+
+<div class="dashboard-detail">
+    <app-navigation></app-navigation>
+    <div class="dashboard-detail__content">
+        <ng-container></ng-container>
+        <task-detail class="dashboard-detail__content__task-detail"
+                     *ngIf="async.activeTask"
+                     [task]="async.activeTask"
+                     [dashboard]="async.dashboard"
+                     [currentUser]="async.user"
+        ></task-detail>
+        <kanban class="dashboard-detail__content__kanban"
+                [tasks]="async.tasks"
+                [dashboard]="async.dashboard"
+                [currentUser]="async.user"
+        ></kanban>
+    </div>
+    <dialog-trigger class="dashboard-detail__dialog-trigger"></dialog-trigger>
+</div>
+
+</ng-container>

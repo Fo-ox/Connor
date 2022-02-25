@@ -1,0 +1,56 @@
+<ng-container *ngIf="{
+    dashboards: dashboards$ | async,
+    myDashboards: groupedDashboards$.my | async,
+    teamDashboards: groupedDashboards$.teams | async,
+    allDashboards: groupedDashboards$.all | async
+} as async">
+
+<div class="dashboard">
+    <app-navigation></app-navigation>
+    <ng-container *ngIf="async.dashboards?.length else noContent">
+        <tui-scrollbar class="_scroll-container">
+            <div class="dashboard__content">
+                <div class="dashboard__content__rows">
+                    <db-kanban-row class="dashboard__content__rows__row"
+                                   *ngIf="async.myDashboards?.length"
+                                   [dashboards]="async.myDashboards"
+                                   [rowTitle]="'Created by me'"
+                                   [update]="true"
+                                   [showCreateButton]="true"
+                    ></db-kanban-row>
+                    <db-kanban-row class="dashboard__content__rows__row"
+                                   *ngIf="async.teamDashboards?.length"
+                                   [dashboards]="async.teamDashboards"
+                                   [rowTitle]="'Teams Dashboards'"
+                                   [showCreateButton]="!async.myDashboards?.length"
+                    ></db-kanban-row>
+                    <db-kanban-row class="dashboard__content__rows__row"
+                                   *ngIf="async.allDashboards?.length"
+                                   [dashboards]="async.allDashboards"
+                                   [rowTitle]="'All Dashboards'"
+                                   [showCreateButton]="!async.myDashboards?.length && !async.teamDashboards?.length"
+                    ></db-kanban-row>
+                </div>
+            </div>
+        </tui-scrollbar>
+    </ng-container>
+
+    <ng-template #noContent>
+        <div class="dashboard__empty">
+            <h2 class="dashboard__empty__title">No Dashboards</h2>
+            <button class="dashboard__empty__create-button"
+                    (tap)="openDialog(createDashboard)"
+            >
+                Create Dashboard
+            </button>
+        </div>
+    </ng-template>
+
+    <dialog-trigger class="dashboard__dialog-trigger"></dialog-trigger>
+</div>
+
+</ng-container>
+
+<ng-template #createDashboard>
+    <create-dashboard (cancelEvent)="closeDialog()"></create-dashboard>
+</ng-template>

@@ -1,0 +1,87 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/fonts";
+
+::ng-deep {
+    tui-wrapper[data-appearance='textfield'] {
+        box-shadow: none;
+        &:hover {
+            box-shadow: none;
+        }
+        &:after {
+            border: none;
+            &:hover {
+                border: none;
+            }
+        }
+    }
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    background-image: url("../../../assets/svg/source/svg-multi-color/background-login.svg");
+    background-size: cover;
+
+    &__window {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: @total-white;
+        min-height: @login-height;
+        width: @login-width;
+        border-radius: @base-border-radius;
+        box-shadow: @login-card-shadow;
+        padding: @block-space;
+
+        &__title {
+            margin: @items-min-space 0;
+            .font-19-extrabold;
+            color: @c-main-text;
+        }
+
+        &__info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &__input {
+                margin: @items-min-space 0;
+                border: @input-border;
+                width: 80%;
+                .transition;
+
+                &._error {
+                    border: @input-border_error;
+                    .transition;
+                }
+            }
+
+            &__invalid {
+                margin-bottom: @items-min-space;
+                color: @accent-flame;
+                .font-11-medium;
+            }
+        }
+
+        &__button {
+            display: flex;
+            justify-content: center;
+
+            button {
+                margin: @items-min-space 0;
+                .button-primary(@width: 100px);
+                .font-13-bold;
+            }
+        }
+    }
+}
+
+.hidden {
+    opacity: 0;
+}
+

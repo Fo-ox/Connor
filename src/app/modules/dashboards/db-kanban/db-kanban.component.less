@@ -1,0 +1,68 @@
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/color";
+@import "../../../../assets/styles/fonts";
+
+.db-kanban {
+    flex: 1;
+    padding: @items-max-space;
+    min-width: @db-kanban-card-width;
+
+    .card-container;
+    cursor: pointer;
+    background-color: @total-white;
+    border-radius: @base-border-radius;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__header {
+        &__info {
+            display: flex;
+            justify-content: space-between;
+
+            &__date {
+                color: @c-additional-text;
+            }
+
+            &__more-action {
+                cursor: pointer;
+            }
+        }
+
+        &__project {
+            margin-top: @space-x2;
+            display: flex;
+
+            &__icon {
+                color: @light-violet;
+                margin-right: @items-min-space;
+                flex-shrink: 0;
+            }
+
+            &__title {
+                color: @c-main-text;
+                .font-15-extrabold;
+            }
+        }
+    }
+
+    &__info {
+        margin-top:@space-x12;
+
+        &__member {
+            color: @c-additional-text;
+        }
+
+        &__dashboard-users {
+            display: flex;
+            flex-wrap: wrap;
+
+            &__avatar {
+                margin-top: @item-flex-gap;
+                width: @user-icon-size-mini;
+                height: @user-icon-size-mini;
+                margin-right: @items-min-space;
+            }
+        }
+    }
+}

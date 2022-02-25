@@ -1,0 +1,59 @@
+<ng-template #parameterType
+             let-data=data
+>
+    <div class="parameter-type" *ngIf="data.key else parameterEmpty">
+        <div class="parameter-type__container">
+            <svg-icon class="parameter-type__container__icon"
+                      [key]="data?.icon?.name"
+                      [size]="'xs'"
+                      [color]="data?.icon?.color"
+            ></svg-icon>
+        </div>
+        <p class="parameter-type__value">{{ data?.displayName }}</p>
+    </div>
+</ng-template>
+
+<ng-template #parameterPriority
+             let-data=data
+>
+    <div class="parameter-priority"
+         *ngIf="data.key else parameterEmpty"
+         [style.background-color]="data?.icon?.backgroundColor"
+    >
+        <p class="parameter-priority__value" [style.color]="data?.icon?.color">
+            {{ data?.displayName }}
+        </p>
+    </div>
+</ng-template>
+
+<ng-template #parameterEmpty>
+    <div class="parameter-empty">----</div>
+</ng-template>
+
+<ng-template #parameterUser
+             let-data=data
+>
+    <div class="parameter-user" *ngIf="data.id else parameterEmpty">
+        <app-avatar class="parameter-user__icon"
+                    [avatarUrl]="data?.userInfo?.profileIcon"
+        ></app-avatar>
+        <p class="parameter-user__name">
+            {{ data?.userInfo?.firstName + ' ' + data?.userInfo?.lastName }}
+        </p>
+    </div>
+</ng-template>
+
+<ng-template #parameterValue
+             let-data=data
+>
+    <p class="parameter-value">{{ data?.displayName }}</p>
+</ng-template>
+
+<ng-template #parameterDate
+             let-data=data
+>
+    <div class="parameter-date">
+        <p class="parameter-date__date">{{ data | date:'dd MMM yy'}}</p>
+        <p class="parameter-date__time">{{ data | date:'HH:mm'}}</p>
+    </div>
+</ng-template>

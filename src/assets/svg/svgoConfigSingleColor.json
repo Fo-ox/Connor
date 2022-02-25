@@ -1,0 +1,30 @@
+{
+  "generateType": "true",
+  "delimiter": "KEBAB",
+  "conversionType": "files",
+  "iconsFolderName": "svg-single-color",
+  "interfaceName": "ISingleColorIcon",
+  "typeName": "SingleColorIcon",
+  "barrelFileName": "single-color-icons",
+  "prefix": "cpm",
+  "srcFiles": [
+    "./src/assets/svg/source/svg-single-color/*.svg"
+  ],
+  "outputDirectory": "./src/assets/svg",
+  "svgoConfig": {
+    "plugins": [
+      {
+        "removeDimensions": {
+          "active": true
+        }
+      },
+      {
+        "removeAttrs": {
+          "active": true,
+          "attrs": "(fill|stroke)"
+        }
+      }
+    ]
+  },
+  "compileSources": false
+}

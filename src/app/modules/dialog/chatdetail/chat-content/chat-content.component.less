@@ -1,0 +1,37 @@
+@import "../../../../../assets/styles/vars";
+@import "../../../../../assets/styles/color";
+@import "../../../../../assets/styles/fonts";
+
+
+.message {
+    display: flex;
+    align-items: center;
+
+    &__box {
+        display: flex;
+        min-height: 40px;
+        max-width: 300px;
+        background-color: @total-white;
+        border-radius: @base-border-radius;
+        border: @card-border;
+        box-shadow: @card-box-shadow;
+        align-items: center;
+        padding: @items-min-space @items-max-space;
+        margin-right: @items-max-space;
+
+        &__avatar {
+            width: @user-icon-size-mini;
+            height: @user-icon-size-mini;
+        }
+
+        &__content {
+            margin-left: @items-min-space;
+            .font-13-medium;
+        }
+    }
+
+    &__time {
+        .font-11-extrabold;
+        color: @c-additional-text;
+    }
+}

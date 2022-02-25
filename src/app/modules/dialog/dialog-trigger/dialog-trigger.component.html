@@ -1,0 +1,6 @@
+<div class="dialog-trigger" (tap)="onDialogNavigate()">
+    <div class="dialog-trigger__counter" *ngIf="isUpdate$ | async"></div>
+    <div class="dialog-trigger__container">
+        <svg-icon class="dialog-trigger__container__icon" [key]="'dialog'" [size]="'md'"></svg-icon>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="kanban-tools">
+    <div class="kanban-tools__content">
+        <div class="kanban-tools__content__dashboard-info">
+            <svg-icon class="kanban-tools__content__dashboard-info__icon"
+                      [key]="'dashboard'"
+                      [size]="'md'"
+            ></svg-icon>
+            <p class="kanban-tools__content__dashboard-info__name">{{ dashboardName }}</p>
+        </div>
+<!--                    over scope                                  -->
+<!--        <div class="kanban-tools__content__filters">Filters</div>-->
+        <button class="kanban-tools__content__create-button"
+                [class._disabled]="noDashboardAccess"
+                (tap)="!noDashboardAccess && openDialog(createTask)"
+        >
+            Create task
+            <div class="kanban-tools__content__create-button__hint"
+                 *ngIf="noDashboardAccess"
+                 tuiHintMode="onDark"
+                 [tuiHint]="noAccess"
+                 [tuiHintShowDelay]="100"
+                 [tuiHintHideDelay]="100"
+                 [tuiHintDirection]="'right'"
+            ></div>
+        </button>
+    </div>
+</div>
+
+<ng-template #noAccess>
+    <p>You do not have access to create task </p>
+</ng-template>
+
+<ng-template #createTask>
+    <create-task (cancelEvent)="closeDialog()"></create-task>
+</ng-template>

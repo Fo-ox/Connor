@@ -1,0 +1,20 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.more-tooltip {
+    &__content {
+        &__item {
+            margin: @items-min-space 0;
+            color: @c-main-text;
+            .font-13-medium;
+            .transition;
+
+            &:hover {
+                cursor: pointer;
+                color: @c-main-text_hover;
+                .transition;
+            }
+        }
+    }
+}

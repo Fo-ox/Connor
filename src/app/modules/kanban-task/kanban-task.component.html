@@ -1,0 +1,48 @@
+<ng-container *ngIf="{
+    assignee: assignee$ | async,
+    isActiveTask: isActiveTask$ | async,
+    userTemplate: userTemplate$ | async
+} as async">
+
+<div class="kanban-task"
+     [class._active]="isActiveTask$ | async"
+>
+    <div class="kanban-task__header">
+        <div class="kanban-task__header__id">
+            {{ task.code?.padStart(10, '0') }}
+        </div>
+        <more-tooltip class="kanban-task__header__more-action"
+                      [items]="transitions"
+                      (selectItem)="onStatusTransition($event)"
+        ></more-tooltip>
+    </div>
+
+    <div *ngIf="task?.title"
+         class="kanban-task__title"
+    >
+        {{ task?.title }}
+    </div>
+
+    <div class="kanban-task__info">
+        <div class="kanban-task__info__user">
+            <ng-container *ngIf="async.assignee else noAssigneeTemplate">
+                <ng-container *ngTemplateOutlet="userTemplate$ | async; context: {data: async.assignee}">
+                </ng-container>
+            </ng-container>
+            <ng-template #noAssigneeTemplate>
+                no assignee
+            </ng-template>
+        </div>
+        <div class="kanban-task__info__task-priority"
+             [style.backgroundColor]="taskIcon.backgroundColor"
+        >
+            <svg-icon class="kanban-task__info__task-priority__task-type"
+                      [key]="taskIcon?.name"
+                      [color]="taskIcon?.color"
+                      [size]="'xs'"
+            ></svg-icon>
+        </div>
+    </div>
+</div>
+
+</ng-container>

@@ -1,0 +1,252 @@
+@import "color";
+
+// -- base coefficient spaces --
+@one-pixel:                     1px;
+@base-space:                    2px;
+@space-x2:                      @base-space * 2;
+@space-x3:                      @base-space * 3;
+@space-x4:                      @base-space * 4;
+@space-x5:                      @base-space * 5;
+@space-x6:                      @base-space * 6;
+@space-x8:                      @base-space * 8;
+@space-x10:                     @base-space * 10;
+@space-x12:                     @base-space * 12;
+@space-x16:                     @base-space * 16;
+@space-x20:                     @base-space * 20;
+@space-x24:                     @base-space * 24;
+
+// -- custom spaces --
+.content-full-wrap() {
+    padding: 0 @space-x24;
+}
+.content-left-wrap() {
+    padding: 0 0 0 @space-x24;
+}
+.content-right-wrap() {
+    padding: 0 @space-x24 0 0;
+}
+
+@item-flex-gap:                 @space-x2;
+@items-min-space:               @space-x4;
+@items-max-space:               @space-x8;
+@block-space:                   @space-x12;
+
+@input-errors-space:            @space-x6;
+
+@button-height:                 @space-x20;
+
+@navigation-height:             90px;
+
+//--login window --
+@login-height:                  280px;
+@login-width:                   400px;
+@login-button-gap:              @space-x24;
+@login-element-margin:          @space-x8;
+@login-card-shadow:             0 0 16px @light-gray;
+
+//-- for dialog(chat) --
+
+@dialog-base-margin:                        50px;
+
+@dialog-sidebar-height:                     450px;
+@dialog-sidebar-width:                      340px;
+@dialog-sidebar-card-width:                 300px;
+@dialog-sidebar-card-height:                100px;
+@dialog-sidebar-card-margin:                4px 30px;
+@dialog-sidebar-button-margin:              40px;
+
+@dialog-sidebar-card-content-padding:       16px 16px 16px;
+@dialog-sidebar-card-content-info-width:    200px;
+
+@dialog-sidebar-list-height:                500px;
+
+@dialog-sending-button-size:                15px;
+
+@dialog-footer-height:                      90px;
+@dialog-messages-gap:                       @space-x5;
+// -- element sizes --
+@kanban-task-width:             240px;
+@kanban-task-container-width:   @kanban-task-width + @items-max-space * 2;
+
+// -- dashboard kanban --
+@db-kanban-card-width:          300px;
+@db-kanban-card-margin-left:    @space-x10;
+@db-kanban-card-margin-top:     @space-x10;
+@db-kanban-row-space:           @space-x24;
+
+// -- chatlist --
+@chatlist-text-max-width:       @space-x8;
+
+// -- base styles --
+@transition-border:             @one-pixel solid transparent;
+@component-border:              @one-pixel solid @c-component-border;
+
+@input-border:                  @one-pixel solid @c-input-border;
+@input-border_hover:            @one-pixel solid @c-input-border_hover;
+@input-border_active:           @one-pixel solid @c-input-border_active;
+@input-border_error:            @one-pixel solid @accent-flame;
+
+@card-border:                   @one-pixel solid @c-card-border;
+@card-border_hover:             @one-pixel solid @c-card-border_hover;
+@card-border_active:            @one-pixel solid @c-card-border_active;
+
+@card-box-shadow:               0 0 16px rgba(121, 121, 121, 0.20);
+
+@base-border-radius:            @space-x6;
+@parameter-border-radius:       @space-x2;
+
+@user-icon-size:                @space-x20;
+@user-icon-size-mini:           @space-x10;
+
+@parameter-icon-size:            @space-x10;
+
+// -- base transition --
+
+@base-duration: 0.2s;
+
+.transition(@duration: @base-duration) {
+    transition: all;
+    transition-duration: @duration;
+    &:hover {
+        transition: all;
+        transition-duration: @duration;
+    }
+    &:active {
+        transition: all;
+        transition-duration: @duration;
+    }
+}
+
+.button-constructor(
+    @height: auto,
+    @width: auto,
+    @color,
+    @bg-color,
+    @color-hover: @color,
+    @color-active: @color,
+    @bg-color-hover: @bg-color,
+    @bg-color-active: @bg-color,
+    @border-radius: @base-border-radius,
+    @border: none,
+    @border-hover: none,
+    @border-active: none) {
+        height: @height;
+        min-width: @width;
+        background-color: @bg-color;
+        color: @color;
+        border-radius: @border-radius;
+        border: @border;
+        .transition;
+
+        &:hover {
+            background-color: @bg-color-hover;
+            color: @color-hover;
+            border: @border-hover;
+        }
+
+        &:active {
+            background-color: @bg-color-active;
+            color: @color-active;
+            border: @border-active;
+        }
+}
+// -- primary button --
+.primary(@height: @button-height, @width: auto) {
+    .button-constructor(
+        @height,
+        @width,
+        @c-main-text,
+        @c-primary-button,
+        @c-main-text_hover,
+        @c-main-text_active,
+        @c-primary-button_hover,
+        @c-primary-button_active
+    );
+}
+.button-primary(@height: @button-height, @width: auto) {
+    .primary(@height, @width);
+    padding: 0 @items-max-space;
+}
+.button-icon-primary(@height: @button-height, @width: auto) {
+    .primary(@height, @width);
+}
+
+// -- secondary button --
+.secondary(@height: @button-height, @width: auto) {
+    .button-constructor(
+        @height,
+        @width,
+        @c-additional-text,
+        @c-secondary-button,
+        @c-additional-text_hover,
+        @c-additional-text_active,
+        @c-secondary-button_hover,
+        @c-secondary-button_active
+    );
+}
+.button-secondary(@height: @button-height, @width: auto) {
+    .secondary(@height, @width);
+    padding: 0 @items-max-space;
+}
+.button-icon-secondary(@height: @button-height, @width: auto) {
+    .secondary(@height, @width);
+}
+
+// -- outline button --
+.outline(@height: @button-height, @width: auto) {
+    .button-constructor(
+        @height,
+        @width,
+        @c-additional-text,
+        transparent,
+        @c-additional-text_hover,
+        @c-additional-text_active,
+        transparent,
+        transparent,
+        @base-border-radius,
+        @input-border,
+        @input-border_hover,
+        @input-border_active
+    );
+}
+.button-outline(@height: @button-height, @width: auto) {
+    .outline(@height, @width);
+    padding: 0 @items-max-space;
+}
+.button-icon-outline(@height: @button-height, @width: auto) {
+    .outline(@height, @width);
+}
+
+// -- technical mixins --
+.scroll-container() {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+.scroll-content() {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+// -- card containers --
+
+.card-container() {
+    .transition;
+    display: block;
+    border: @transition-border;
+    box-shadow: none;
+
+    &:hover {
+        border: @card-border_hover;
+        box-shadow: @card-box-shadow;
+    }
+
+    &:active {
+        border: @card-border_active;
+    }
+}

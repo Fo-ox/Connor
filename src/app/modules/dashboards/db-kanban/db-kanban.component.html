@@ -1,0 +1,49 @@
+<ng-container *ngIf="{
+    userAvatars: userAvatars$ | async
+} as async">
+
+<div class="db-kanban">
+    <div class="db-kanban__header">
+        <div class="db-kanban__header__info">
+            <p class="db-kanban__header__info__date">
+                {{ dashboard?.creationDate | date:"dd MMM yy" }}
+            </p>
+            <more-tooltip *ngIf="update" [items]="actions" (selectItem)="onItemSelect($event)"></more-tooltip>
+        </div>
+
+        <div class="db-kanban__header__project" *ngIf="dashboard?.projectTitle">
+            <svg-icon class="db-kanban__header__project__icon"
+                      [key]="'dashboard'"
+                      [size]="'md'"
+            ></svg-icon>
+            <p class="db-kanban__header__project__title"> {{ dashboard.projectTitle }} </p>
+        </div>
+    </div>
+
+    <div class="db-kanban__info">
+        <ng-container *ngIf="dashboard?.assignee?.length > 1; else personal">
+            <p class="db-kanban__info__member">Team</p>
+            <div class="db-kanban__info__dashboard-users">
+                <app-avatar *ngFor="let assignee of dashboard.assignee"
+                            [avatarUrl]="async.userAvatars[assignee]"
+                            class="db-kanban__info__dashboard-users__avatar"
+                ></app-avatar>
+            </div>
+        </ng-container>
+
+        <ng-template #personal>
+            <p class="db-kanban__info__member">Personal</p>
+            <div class="db-kanban__info__dashboard-users">
+                <app-avatar class="db-kanban__info__dashboard-users__avatar"
+                            [avatarUrl]="async.userAvatars[dashboard?.reporter]"
+                ></app-avatar>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<ng-template #createDashboard>
+    <create-dashboard (cancelEvent)="closeDialog()" [initialValues]="dashboard"></create-dashboard>
+</ng-template>
+
+</ng-container>

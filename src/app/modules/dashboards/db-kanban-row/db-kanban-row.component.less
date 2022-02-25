@@ -1,0 +1,42 @@
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/color";
+@import "../../../../assets/styles/fonts";
+
+.db-kanban-row {
+    height: 100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        margin-bottom: @block-space;
+
+        &__text {
+            margin-left: @items-max-space;
+            color: @c-main-text;
+            .font-19-medium;
+        }
+
+        &__create-button {
+            .button-primary;
+            .font-13-bold;
+            color: @c-main-text;
+            cursor: pointer;
+        }
+
+    }
+
+    &__detail {
+        display: grid;
+        grid-gap: @items-max-space;
+        grid-auto-flow: row dense;
+        grid-auto-rows: min-content;
+        grid-template-rows: min-content;
+        grid-template-columns: repeat(auto-fill, minmax(@db-kanban-card-width, 1fr));
+
+        &__card {
+            display: flex;
+        }
+    }
+}

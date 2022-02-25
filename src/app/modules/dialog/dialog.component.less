@@ -1,0 +1,38 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.dialog{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    &__board {
+        display: flex;
+        height: 100%;
+
+        &__sidebar {
+            min-width: @dialog-sidebar-width;
+            max-width: @dialog-sidebar-width;
+            flex: 1 0;
+        }
+
+        &__detail {
+            flex: 3 0;
+        }
+    }
+
+    &__select {
+        height: 100%;
+        width: 100%;
+        background: @c-base-background;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__title  {
+            color: @c-additional-text;
+            .font-32-extrabold;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<div class="kanban-task-col">
+    <div class="kanban-task-col__header">
+        <p class="kanban-task-col__header__title">{{ columnName }}</p>
+        <div class="kanban-task-col__header__counter">
+            <p class="kanban-task-col__header__counter__current">
+                {{ filteredTaskCount }}
+            </p>
+            <p class="kanban-task-col__header__counter__all">
+                {{ '&nbsp;/&nbsp;' + allTaskCount }}
+            </p>
+        </div>
+    </div>
+
+    <ng-container *ngIf="tasks?.length; else emptyTasksTemplate">
+        <tui-scrollbar class="_scroll-container" [hidden]="true">
+            <div class="kanban-task-col__content">
+                <div class="kanban-task-col__content__scroll-end"></div>
+                <kanban-task class="kanban-task-col__content__task"
+                             *ngFor="let task of tasks"
+                             [task]="task"
+                             (tap)="onSelectTask(task.dashboardId, task.id)"
+                ></kanban-task>
+                <div class="kanban-task-col__content__scroll-end"></div>
+            </div>
+        </tui-scrollbar>
+    </ng-container>
+
+    <ng-template #emptyTasksTemplate>
+        <div class="kanban-task-col__empty">
+            <p class="kanban-task-col__empty__text">No tasks yet</p>
+        </div>
+    </ng-template>
+</div>

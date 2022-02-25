@@ -1,0 +1,68 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.navigation {
+    min-height: @navigation-height;
+    background-color: @total-white;
+    border-bottom: @component-border;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .content-full-wrap;
+
+    &__user-info {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: @items-min-space 0;
+
+        &__icon {
+            flex-shrink: 0;
+            width: @user-icon-size;
+            height: @user-icon-size;
+            border-radius: @base-border-radius;
+            margin-right: @items-max-space;
+        }
+
+        &__hello {
+            .font-19-medium;
+            color: @c-main-text;
+
+            &._action-text {
+                color: @c-accent-text;
+            }
+        }
+    }
+
+    &__links {
+        margin: @items-min-space 0;
+
+        &__dashboard {
+            .font-19-medium;
+            color: @c-main-text;
+            cursor: pointer;
+        }
+    }
+
+    &__tools {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        &__search {
+            margin: @item-flex-gap @items-min-space @item-flex-gap 0;
+        }
+
+        &__settings {
+            .button-icon-outline(@width: @button-height);
+            margin: @item-flex-gap @items-min-space @item-flex-gap 0;
+        }
+
+        &__logout {
+            .button-icon-outline(@width: @button-height);
+            margin: @item-flex-gap 0;
+        }
+    }
+}

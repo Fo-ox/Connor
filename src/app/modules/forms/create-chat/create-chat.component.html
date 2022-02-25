@@ -1,0 +1,94 @@
+<ng-container *ngIf="{
+    loading: loading$ | async,
+    userTemplate: userTemplate$ | async,
+    currentUser: currentUser$ | async,
+    searchedUsers: searchedUsers$ | async
+} as async">
+
+    <form [formGroup]="formGroup" class="create-chat">
+        <h2 class="create-chat__title">Create Chat</h2>
+        <div class="create-chat__group">
+            <p class="create-chat__group__title">Chat details</p>
+
+            <tui-input
+                class="create-chat__group__name"
+                formControlName="name"
+                [class._error]="formGroup.controls.name.errors && formGroup.controls.name.touched"
+                [tuiTextfieldSize]="'m'"
+            >
+                Chat title*
+            </tui-input>
+
+            <div class="create-chat__group__required-error"
+                 *ngIf="formGroup.controls.name.errors && formGroup.controls.name.touched"
+            >
+                field is required
+            </div>
+
+            <tui-multi-select
+                class="create-chat__group__team"
+                formControlName="team"
+                [class._error]="formGroup.controls.team.errors && formGroup.controls.team.touched"
+                [tuiTextfieldSize]="'m'"
+                [tuiTextfieldLabelOutside]="true"
+                [valueContent]="selectContent"
+                [stringify]="stringify"
+                (searchChange)="onUsersSearch($event)"
+            >
+                <p>Chat members</p>
+                <tui-data-list-wrapper
+                    *tuiDataList tuiMultiSelectGroup
+                    [items]="async.searchedUsers"
+                    [itemContent]="content"
+                ></tui-data-list-wrapper>
+
+            </tui-multi-select>
+
+            <div class="create-chat__group__required-error"
+                 *ngIf="formGroup.controls.team.errors && formGroup.controls.team.touched"
+            >
+                field is required
+            </div>
+        </div>
+
+        <div class="create-chat__actions">
+            <tui-loader [showLoader]="async.loading">
+                <button class="create-chat__actions__create-button"
+                        [disabled]="async.loading"
+                        (tap)="onCreate()"
+                >
+                    Create
+                </button>
+            </tui-loader>
+
+            <button class="create-chat__actions__close-button"
+                    [disabled]="async.loading"
+                    (tap)="cancelEvent.emit(true)"
+            >
+                Close
+            </button>
+        </div>
+
+    </form>
+
+    <ng-template #content let-data>
+        <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: data}"></ng-container>
+    </ng-template>
+
+    <ng-template #selectContent let-data>
+        <div class="create-chat__select">
+            <p class="create-chat__select__title">Chat members</p>
+            <div class="create-chat__select__content">
+                <div class="create-chat__select__content__item">
+                    <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: async.currentUser}"></ng-container>
+                </div>
+                <ng-container *ngFor="let user of data; let index">
+                    <div class="create-chat__select__content__item">
+                        <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-template>
+
+</ng-container>

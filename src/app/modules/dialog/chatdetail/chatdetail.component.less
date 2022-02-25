@@ -1,0 +1,126 @@
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/color";
+@import "../../../../assets/styles/fonts";
+
+::ng-deep {
+    tui-wrapper[data-appearance='textfield'] {
+        box-shadow: none;
+        &:hover {
+            box-shadow: none;
+        }
+        &:after {
+            border: none;
+            &:hover {
+                border: none;
+            }
+        }
+    }
+}
+
+.chat-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100% ;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        align-items: center;
+        .content-full-wrap;
+
+        &__name {
+            .font-15-extrabold;
+        }
+
+        &__nums {
+            cursor: pointer;
+            color: @light-violet;
+            .font-13-medium;
+        }
+    }
+
+    &__container {
+        background: @c-base-background;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__empty {
+            color: @c-additional-text;
+            .font-32-extrabold;
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            .content-full-wrap;
+            padding-top: @items-max-space;
+            padding-bottom: @items-max-space;
+            .scroll-content;
+
+            &__message {
+                margin: @items-min-space 0;
+                align-self: flex-start;
+
+                &._send-by-me {
+                    align-self: flex-end;
+                }
+            }
+
+            &__last-scroll-elem {
+                display: block;
+                min-height: @items-max-space;
+                width: 100%;
+            }
+
+            &__time {
+                .font-11-medium;
+            }
+        }
+    }
+
+    &__bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .content-full-wrap;
+        margin: 16px 0 40px;
+        position: relative;
+
+        &__input {
+            .button-outline;
+            .font-13-regular;
+            color: @c-additional-text;
+            width: 100%
+        }
+
+        &__button {
+            height: @dialog-sending-button-size;
+            width: @dialog-sending-button-size;
+            cursor: pointer;
+            position: absolute;
+            top: 16px;
+            bottom: 0;
+            right: 66px;
+        }
+    }
+}
+
+.dropdown {
+    width:200px;
+    height:20px;
+
+    &__detail {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+        margin: @items-min-space @items-max-space;
+    }
+}
+
+.scroll-container {
+    .scroll-container;
+}
+

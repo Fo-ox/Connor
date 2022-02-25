@@ -1,0 +1,81 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.kanban-task-col {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 @items-max-space;
+        margin-bottom: @items-max-space;
+        max-width: @kanban-task-width;
+        width: 100%;
+
+        &__title {
+            .font-19-medium;
+            color: @c-main-text;
+        }
+
+        &__counter {
+            display: flex;
+            align-items: baseline;
+
+            &__current {
+                .font-19-medium;
+                color: @c-main-text;
+            }
+
+            &__all {
+                .font-11-semibold;
+                color: @c-additional-text;
+            }
+        }
+
+    }
+
+    &__content {
+        .scroll-content;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        &__task {
+            display: block;
+            margin-bottom: @items-max-space;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &__scroll-end {
+            display: block;
+            width: 100%;
+            min-height: @items-min-space;
+        }
+    }
+
+    &__empty {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__text {
+            display: block;
+            .font-19-extrabold;
+            color: @c-additional-text;
+        }
+    }
+}
+
+._scroll-container {
+    .scroll-container;
+}

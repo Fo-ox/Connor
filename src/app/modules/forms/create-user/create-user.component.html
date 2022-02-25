@@ -1,0 +1,112 @@
+<ng-container *ngIf="{
+    loading: loading$ | async
+} as async">
+
+    <form [formGroup]="formGroup" class="create-user">
+        <h2 class="create-user__title">Create User</h2>
+        <div class="create-user__group">
+            <p class="create-user__group__title">User details</p>
+            <div class="create-user__group__container">
+                <div class="create-user__group__container__item">
+                    <tui-input
+                        class="create-user__group__container__item__name"
+                        formControlName="firstName"
+                        [class._error]="formGroup.controls.firstName.errors && formGroup.controls.firstName.touched"
+                        [tuiTextfieldSize]="'m'"
+                    >
+                        First name*
+                    </tui-input>
+
+                    <div class="create-user__group__container__item__name-error"
+                         *ngIf="formGroup.controls.firstName.errors && formGroup.controls.firstName.touched"
+                    >
+                        field is required
+                    </div>
+                </div>
+
+                <div class="create-user__group__container__item">
+                    <tui-input
+                        class="create-user__group__container__item__name"
+                        formControlName="lastName"
+                        [class._error]="formGroup.controls.lastName.errors && formGroup.controls.lastName.touched"
+                        [tuiTextfieldSize]="'m'"
+                    >
+                        Last name*
+                    </tui-input>
+
+                    <div class="create-user__group__container__item__name-error"
+                         *ngIf="formGroup.controls.lastName.errors && formGroup.controls.lastName.touched"
+                    >
+                        field is required
+                    </div>
+                </div>
+            </div>
+            <tui-input
+                class="create-user__group__container__item__name _margin-top"
+                formControlName="login"
+                [class._error]="formGroup.controls.login.errors && formGroup.controls.login.touched"
+                [tuiTextfieldSize]="'m'"
+            >
+                Login*
+            </tui-input>
+
+            <div class="create-user__group__container__item__name-error"
+                 *ngIf="formGroup.controls.login.errors && formGroup.controls.login.touched"
+            >
+                field is required
+            </div>
+
+            <tui-input
+                class="create-user__group__container__item__name _margin-top"
+                formControlName="password"
+                [class._error]="formGroup.controls.password.errors && formGroup.controls.password.touched"
+                [tuiTextfieldSize]="'m'"
+                [tuiTextfieldType]="'password'"
+            >
+                Password*
+            </tui-input>
+
+            <div class="create-user__group__container__item__name-error"
+                 *ngIf="formGroup.controls.password.errors && formGroup.controls.password.touched"
+            >
+                field is required
+            </div>
+        </div>
+
+        <p class="create-user__group__settings">User settings</p>
+
+        <div class="create-user__group__settings__content">
+            <app-avatar class="create-user__group__settings__content__avatar"
+                        [avatarUrl]="formGroup.controls.profileIcon.value"
+            ></app-avatar>
+            <tui-input
+                class="create-user__group__container__item__name"
+                formControlName="profileIcon"
+                [tuiTextfieldSize]="'m'"
+                [tuiTextfieldType]="'url'"
+            >
+                Profile icon url
+            </tui-input>
+        </div>
+
+        <div class="create-user__actions">
+            <tui-loader [showLoader]="async.loading">
+                <button class="create-user__actions__create-button"
+                        [disabled]="async.loading"
+                        (tap)="onCreate()"
+                >
+                    Create
+                </button>
+            </tui-loader>
+
+            <button class="create-user__actions__close-button"
+                    [disabled]="async.loading"
+                    (tap)="cancelEvent.emit(true)"
+            >
+                Close
+            </button>
+        </div>
+
+    </form>
+
+</ng-container>

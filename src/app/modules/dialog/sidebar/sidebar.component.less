@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/vars";
+@import "../../../../assets/styles/color";
+@import "../../../../assets/styles/fonts";
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    &__content {
+        .scroll-content;
+
+        &__chat-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__create-button {
+            display: block;
+            .button-primary(@width: 20px);
+            .font-13-bold;
+            color: @c-main-text;
+            margin: @dialog-sidebar-button-margin 0;
+        }
+    }
+}
+
+.scroll-container {
+    .scroll-container;
+}
+
+

@@ -1,0 +1,75 @@
+<div class="chat-detail" (keyup.enter)="onSendMessage()">
+    <div class="chat-detail__header">
+        <div class="chat-detail__header__name">{{ chat?.titleChat }}</div>
+
+        <ng-container *ngIf="chat?.users?.length > 2; else userInfo">
+            <tui-hosted-dropdown
+                class="chat-detail__header__nums"
+                [content]="Members"
+                [tuiDropdownMaxHeight]="100"
+            >
+                <div>show {{chat.users.length}} members</div>
+            </tui-hosted-dropdown>
+            <ng-template class="dropdown" #Members>
+                <ng-container *ngFor="let member of chat?.users">
+                    <div class="dropdown__detail">
+                        <ng-container *ngTemplateOutlet="userTemplate$ | async; context: {data: member}"></ng-container>
+                    </div>
+                </ng-container>
+            </ng-template>
+        </ng-container>
+
+        <ng-template #userInfo>
+            <ng-container *ngFor="let member of chat?.users">
+                <ng-container *ngIf="member?.id !== user?.id">
+                    <ng-container *ngTemplateOutlet="userTemplate$ | async; context: {data: member}"></ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-template>
+
+    </div>
+
+    <div class="chat-detail__container"
+         *ngIf="(allMessages$ | async)?.[chat.chartId] as messages"
+    >
+        <tui-scrollbar class="scroll-container"
+                       *ngIf="messages?.length; else noMessages"
+        >
+            <div class="chat-detail__container__content">
+                <app-chat-content
+                    *ngFor="let message of messages"
+                    class="chat-detail__container__content__message"
+                    [class._send-by-me]="message?.fromUserId === user?.id"
+                    [chatContent]="message"
+                    [avatarUrl]="(userAvatars$ | async)?.[message.fromUserId]"
+                ></app-chat-content>
+                <div class="chat-detail__container__content__last-scroll-elem"></div>
+            </div>
+        </tui-scrollbar>
+
+        <ng-template #noMessages>
+            <h2 class="chat-detail__container__empty">No Messages</h2>
+        </ng-template>
+    </div>
+
+    <div class="chat-detail__bar">
+        <tui-primitive-textfield
+            class="chat-detail__bar__input"
+            [(value)]="messageValue"
+            [tuiTextfieldSize]="'m'"
+        >
+            <p>New Message</p>
+            <ng-content></ng-content>
+        </tui-primitive-textfield>
+
+        <svg-icon
+            class="chat-detail__bar__button"
+            [key]="'dialog-sending'"
+            [size]="'sm'"
+            (tap)="onSendMessage()"
+        ></svg-icon>
+    </div>
+    <span></span>
+</div>
+
+

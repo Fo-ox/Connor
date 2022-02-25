@@ -1,0 +1,68 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.kanban {
+    height: 100%;
+    background-color: @c-base-background;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+        .content-full-wrap;
+        display: flex;
+        justify-content: space-between;
+        padding-top: @block-space;
+        height: 100%;
+
+        &__col {
+            flex: 1 0 @kanban-task-width + @items-min-space * 2;
+            margin: 0 @items-min-space;
+        }
+    }
+
+    &__empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+
+        &__title {
+            color: @c-additional-text;
+            .font-32-extrabold;
+        }
+
+        &__create-button {
+            .button-primary;
+            .font-13-bold;
+            color: @c-main-text;
+            cursor: pointer;
+            margin-top: @items-max-space;
+            position: relative;
+
+            &__hint {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+
+            &._disabled {
+                background-color: @c-primary-button_disabled;
+                color: @light-gray;
+                cursor: default;
+            }
+        }
+    }
+}
+
+._scroll-container {
+    display: block;
+    height: 100%;
+    overflow-y: hidden;
+}

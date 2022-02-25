@@ -1,0 +1,209 @@
+<ng-container *ngIf="{
+    loading: loading$ | async,
+    commentsLoading: commentsLoading$ | async,
+    taskComments: taskComments$ | async,
+    userAvatars: userAvatars$ | async
+} as async">
+
+<div class="task-detail">
+    <svg-icon class="task-detail__close"
+              [key]="'close'"
+              [size]="'md'"
+              (tap)="onTaskDetailClose()"
+    ></svg-icon>
+    <div class="task-detail__content">
+
+        <tui-scrollbar class="_scroll-container" [hidden]="editingTitle || editingDescription">
+            <div class="task-detail__content__task">
+                    <div class="task-detail__content__task__id">
+                        {{ dashboard?.projectTitle + '-' + task.code?.padStart(10, '0') }}
+                    </div>
+                    <div class="task-detail__content__task__title">
+                        <tui-input-inline
+                            class="task-detail__content__task__title__inline"
+                            *ngIf="editingTitle else text"
+                            tuiAutoFocus
+                            [ngModel]="draftTaskUI.title"
+                            (focusedChange)="$event || (editingTitle = false)"
+                            (ngModelChange)="onDraftTaskUpdate($event, 'title')"
+                        >
+                            Task Name
+                        </tui-input-inline>
+
+                        <ng-template #text>
+                            <div class="task-detail__content__task__title__edit">
+                                <span>{{ draftTaskUI?.title }}</span>
+                                <svg-icon class="task-detail__content__task__title__edit__icon"
+                                          [key]="'edit'"
+                                          [size]="'md'"
+                                          (tap)="editingTitle = true"
+                                          *ngIf="!noDashboardAccess"
+                                ></svg-icon>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                    <div class="task-detail__content__task__main-section">
+                        <div class="task-detail__content__task__main-section__parameters">
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'status'"
+                                            [parameterValue]="draftTaskUI?.status"
+                            ></task-parameter>
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'type'"
+                                            [parameterValue]="draftTaskUI?.type"
+                                            [editable]="!noDashboardAccess"
+                                            (parameterValueChanges)="onDraftTaskUpdate($event, 'type')"
+                            ></task-parameter>
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'priority'"
+                                            [parameterValue]="draftTaskUI?.priority"
+                                            [editable]="!noDashboardAccess"
+                                            (parameterValueChanges)="onDraftTaskUpdate($event, 'priority')"
+                            ></task-parameter>
+                        </div>
+                        <div class="task-detail__content__task__main-section__transition">
+                            <button class="task-detail__content__task__main-section__transition__button"
+                                    *ngFor="let transition of transitions"
+                                    (tap)="onTransitionTask(transition)"
+                            >
+                                {{ transition.displayName }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <span class="task-detail__content__task__separator"></span>
+
+                    <div class="task-detail__content__task__secondary-section">
+                        <div class="task-detail__content__task__secondary-section__parameters">
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'reporter'"
+                                            [parameterValue]="draftTaskUI?.reporter"
+                            ></task-parameter>
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'assignee'"
+                                            [dashboard]="dashboard"
+                                            [parameterValue]="draftTaskUI?.assignee"
+                                            [editable]="!noDashboardAccess"
+                                            (parameterValueChanges)="onDraftTaskUpdate($event, 'assignee')"
+                            ></task-parameter>
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'creationDate'"
+                                            [parameterValue]="draftTaskUI?.creationDate"
+                            ></task-parameter>
+                            <task-parameter class="task-detail__content__task__main-section__parameters__parameter"
+                                            [parameterName]="'updateDate'"
+                                            [parameterValue]="draftTaskUI?.updateDate"
+                            ></task-parameter>
+                        </div>
+                    </div>
+
+                    <span class="task-detail__content__task__separator"></span>
+
+                    <div class="task-detail__content__task__description">
+                        <div class="task-detail__content__task__description__title">Description</div>
+
+                        <tui-input-inline
+                            class="task-detail__content__task__description__inline"
+                            *ngIf="editingDescription else descriptionText"
+                            tuiAutoFocus
+                            [ngModel]="draftTaskUI.description"
+                            (focusedChange)="$event || (editingDescription = false)"
+                            (ngModelChange)="onDraftTaskUpdate($event, 'description')"
+                        >
+                            Description
+                        </tui-input-inline>
+
+                        <ng-template #descriptionText>
+                            <div class="task-detail__content__task__description__edit">
+                                <span>{{ draftTaskUI?.description }}</span>
+                                <svg-icon class="task-detail__content__task__description__edit__icon"
+                                          [key]="'edit'"
+                                          [size]="'sm'"
+                                          (tap)="editingDescription = true"
+                                          *ngIf="!noDashboardAccess"
+                                ></svg-icon>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                    <span class="task-detail__content__task__separator"></span>
+
+                    <div class="task-detail__content__task__comments">
+                        <div class="task-detail__content__task__comments__title">Comments</div>
+                        <div class="task-detail__content__task__comments__content"
+                            *ngIf="async.taskComments?.length"
+                        >
+                            <div class="task-detail__content__task__comments__content__comment"
+                            *ngFor="let comment of async.taskComments">
+                                <div class="task-detail__content__task__comments__content__comment__text">
+                                    <app-avatar class="task-detail__content__task__comments__content__comment__text__icon"
+                                                [avatarUrl]="async.userAvatars[comment.userId]"
+                                    ></app-avatar>
+                                    <p class="task-detail__content__task__comments__content__comment__text__title">
+                                        {{ comment.commentText }}
+                                    </p>
+                                </div>
+                                <div class="task-detail__content__task__comments__content__comment__time">
+                                    {{ comment.commentTime | date:'HH:mm' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <tui-loader [showLoader]="async.commentsLoading" *ngIf="async.commentsLoading">
+                            <div class="task-detail__content__task__comments__loading"></div>
+                        </tui-loader>
+
+                        <div class="task-detail__content__task__comments__empty"
+                             *ngIf="!async.commentsLoading && !async.taskComments?.length"
+                        >
+                            No comments
+                        </div>
+
+                        <div class="task-detail__content__task__comments__input">
+                            <tui-primitive-textfield
+                                class="task-detail__content__task__comments__input__tui"
+                                [(value)]="commentValue"
+                                [tuiTextfieldSize]="'m'"
+                            >
+                                <p>New comment</p>
+                                <ng-content></ng-content>
+                            </tui-primitive-textfield>
+
+                            <svg-icon
+                                class="task-detail__content__task__comments__input__button"
+                                [key]="'dialog-sending'"
+                                [size]="'sm'"
+                                (tap)="onAddingComment()"
+                            ></svg-icon>
+                        </div>
+                    </div>
+            </div>
+        </tui-scrollbar>
+
+        <div class="task-detail__content__actions" *ngIf="taskChanges">
+            <tui-loader [showLoader]="async.loading">
+                <button class="task-detail__content__actions__save"
+                        [disabled]="async.loading"
+                        (tap)="onUpdateChanges()"
+                >Save</button>
+            </tui-loader>
+            <tui-loader [showLoader]="async.loading">
+                <button class="task-detail__content__actions__cancel"
+                        [disabled]="async.loading"
+                        (tap)="onCancelChanges()"
+                >Cancel</button>
+            </tui-loader>
+        </div>
+
+        <div class="task-detail__content__warning" *ngIf="noDashboardAccess">
+            <div class="task-detail__content__warning__content">
+                <svg-icon class="task-detail__content__warning__content__icon" [key]="'d-type-story'" [size]="'sm'"></svg-icon>
+                <p class="task-detail__content__warning__content__text">You do not have access to edit this task</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</ng-container>

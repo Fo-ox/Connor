@@ -1,0 +1,30 @@
+<div class="db-kanban-row">
+    <div class="db-kanban-row__header">
+        <div class="db-kanban-row__header__text"
+             *ngIf="rowTitle && dashboards?.length"
+        >
+            {{ rowTitle }}
+        </div>
+        <button class="db-kanban-row__header__create-button"
+                *ngIf="showCreateButton"
+                (tap)="openDialog(createDashboard)"
+        >
+            Create Dashboards
+        </button>
+    </div>
+
+    <div class="db-kanban-row__detail">
+        <db-kanban class="db-kanban-row__detail__card"
+                   *ngFor="let dashboard of dashboards"
+                   [dashboard]="dashboard"
+                   [update]="update"
+                   (tap)="onSelectDashboard(dashboard.id)"
+        ></db-kanban>
+    </div>
+</div>
+
+<ng-template #createDashboard>
+    <create-dashboard (cancelEvent)="closeDialog()"></create-dashboard>
+</ng-template>
+
+

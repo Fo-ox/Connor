@@ -1,0 +1,35 @@
+<ng-container *ngIf="{
+    lastUser: lastUser$ | async
+} as aync">
+
+<div class="card" [class._active]="isActive$ | async">
+    <div class="content">
+        <app-avatar class="content__photo"></app-avatar>
+        <div class="content__info">
+            <div class="content__info__title">
+                    <div class="content__info__title__name">
+                        {{ chatList?.titleChat }}
+                    </div>
+<!--                    <div class="content__info__title__more">-->
+<!--                        <svg-icon [key]="'more'" [size]="'sm'"></svg-icon>-->
+<!--                    </div>-->
+            </div>
+
+            <ng-container *ngIf="lastMessage">
+                <div class="content__info__user" *ngIf="chatList?.users?.length > 2">
+                    {{ aync.lastUser?.userInfo?.firstName + " " +  aync.lastUser?.userInfo?.lastName }}
+                </div>
+
+                <div class="content__info__bottom">
+                    <div class="content__info__bottom__msg">{{ lastMessage?.messageText }}</div>
+                    <div class="content__info__bottom__time">
+                        {{ lastMessage?.messageTime | date:"HH:mm" }}
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>
+
+</ng-container>
