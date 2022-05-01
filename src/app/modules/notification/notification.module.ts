@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification.component';
-import { TuiNotificationsModule } from "@taiga-ui/core";
+import { TuiModeModule, TuiNotificationsModule, TuiThemeNightModule } from "@taiga-ui/core";
 
 @NgModule({
     declarations: [
@@ -13,6 +13,8 @@ import { TuiNotificationsModule } from "@taiga-ui/core";
     imports: [
         CommonModule,
         TuiNotificationsModule,
+        TuiThemeNightModule,
+        TuiModeModule,
     ]
 })
 export class NotificationModule { }

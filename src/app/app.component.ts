@@ -46,85 +46,85 @@ export class AppComponent implements OnInit, OnDestroy {
                 if (!sessionUser) {
                     return;
                 }
-                this.socketService._connectMessage();
-                this.socketService._connectChat();
-                this.restApiService.loadUsers()
-                    .pipe(
-                        tap((users: UserResponse[]) => {
-                            AtomStateService.systemUsersState.setAtomByKey({
-                                key: 'SYSTEM_USERS',
-                                value: users?.map((user: UserResponse) => {
-                                    return ConverterHelper.convertUserResponseToUser(user)
-                                })
-                            })
-                            AtomStateService.thisUserState.setAtomByKey({
-                                key: 'THIS_USER',
-                                value: ConverterHelper.convertUserResponseToUser(users
-                                    ?.find((user: UserResponse) => user.userId === sessionUser.userId))
-                            })
-                        })
-                    ).subscribe();
+                // this.socketService._connectMessage();
+                // this.socketService._connectChat();
+                // this.restApiService.loadUsers()
+                //     .pipe(
+                //         tap((users: UserResponse[]) => {
+                //             AtomStateService.systemUsersState.setAtomByKey({
+                //                 key: 'SYSTEM_USERS',
+                //                 value: users?.map((user: UserResponse) => {
+                //                     return ConverterHelper.convertUserResponseToUser(user)
+                //                 })
+                //             })
+                //             AtomStateService.thisUserState.setAtomByKey({
+                //                 key: 'THIS_USER',
+                //                 value: ConverterHelper.convertUserResponseToUser(users
+                //                     ?.find((user: UserResponse) => user.userId === sessionUser.userId))
+                //             })
+                //         })
+                //     ).subscribe();
 
-                this.restApiService.loadDashboards()
-                    .pipe(
-                        tap((dashboards: DashboardResponse[]) => AtomStateService.dashboardState.setAtomByKey({
-                            key: 'DASHBOARDS',
-                            value: dashboards?.map((dashboard: DashboardResponse) => {
-                                return ConverterHelper.convertDashboardResponseToDashboard(dashboard)
-                            })
-                        }))
-                    ).subscribe();
+                // this.restApiService.loadDashboards()
+                //     .pipe(
+                //         tap((dashboards: DashboardResponse[]) => AtomStateService.dashboardState.setAtomByKey({
+                //             key: 'DASHBOARDS',
+                //             value: dashboards?.map((dashboard: DashboardResponse) => {
+                //                 return ConverterHelper.convertDashboardResponseToDashboard(dashboard)
+                //             })
+                //         }))
+                //     ).subscribe();
 
-                this.restApiService.loadTasks()
-                    .pipe(
-                        tap((tasks: TaskResponse[]) => AtomStateService.tasksState.setAtomByKey({
-                            key: 'TASKS',
-                            value: tasks?.map((task: TaskResponse) => {
-                                return ConverterHelper.convertTaskResponseToTask(task)
-                            })
-                        }))
-                    ).subscribe();
+                // this.restApiService.loadTasks()
+                //     .pipe(
+                //         tap((tasks: TaskResponse[]) => AtomStateService.tasksState.setAtomByKey({
+                //             key: 'TASKS',
+                //             value: tasks?.map((task: TaskResponse) => {
+                //                 return ConverterHelper.convertTaskResponseToTask(task)
+                //             })
+                //         }))
+                //     ).subscribe();
 
-                this.restApiService.loadChats(sessionUser.userId)
-                    .pipe(
-                        tap((chats: ChatListResponse[]) => {
-                            chats && AtomStateService.chatListState.setAtomByKey({
-                                key: 'CHAT_LIST',
-                                value: chats
-                                    ?.map((chat: ChatListResponse) => ConverterHelper.convertChatResponseToChat(chat))
-                                    ?.sort((curr: ChatList, next: ChatList) => +new Date(next.createTime) - +new Date(curr.createTime))
-                            })
-
-                            const messagesByChatId: Record<string, ChatMessage[]> = {};
-
-                            chats.forEach((chat: ChatListResponse, index: number) => {
-                                this.restApiService.loadMessages(chat.chartId)
-                                    .pipe(
-                                        tap((messages: ChatMessageResponse[]) => {
-                                            messagesByChatId[chat.chartId] = messages
-                                                ?.map((message: ChatMessageResponse) => ConverterHelper.convertMessageResponseToMessage(message))
-                                                ?.sort((curr: ChatMessage, next: ChatMessage) => +new Date(curr.messageTime) - +new Date(next.messageTime))
-                                            if (chats.length - 1 === index) {
-                                                this.messageTrigger$.next(messagesByChatId);
-                                            }
-                                        }),
-                                    ).subscribe();
-                            })
-                        })
-                    ).subscribe();
+                // this.restApiService.loadChats(sessionUser.userId)
+                //     .pipe(
+                //         tap((chats: ChatListResponse[]) => {
+                //             chats && AtomStateService.chatListState.setAtomByKey({
+                //                 key: 'CHAT_LIST',
+                //                 value: chats
+                //                     ?.map((chat: ChatListResponse) => ConverterHelper.convertChatResponseToChat(chat))
+                //                     ?.sort((curr: ChatList, next: ChatList) => +new Date(next.createTime) - +new Date(curr.createTime))
+                //             })
+                //
+                //             const messagesByChatId: Record<string, ChatMessage[]> = {};
+                //
+                //             chats.forEach((chat: ChatListResponse, index: number) => {
+                //                 this.restApiService.loadMessages(chat.chartId)
+                //                     .pipe(
+                //                         tap((messages: ChatMessageResponse[]) => {
+                //                             messagesByChatId[chat.chartId] = messages
+                //                                 ?.map((message: ChatMessageResponse) => ConverterHelper.convertMessageResponseToMessage(message))
+                //                                 ?.sort((curr: ChatMessage, next: ChatMessage) => +new Date(curr.messageTime) - +new Date(next.messageTime))
+                //                             if (chats.length - 1 === index) {
+                //                                 this.messageTrigger$.next(messagesByChatId);
+                //                             }
+                //                         }),
+                //                     ).subscribe();
+                //             })
+                //         })
+                //     ).subscribe();
             }),
             untilDestroyed(this)
         ).subscribe();
 
-        this.messageTrigger$.pipe(
-            tap((initialMessages: Record<string, ChatMessage[]>) => {
-                initialMessages && AtomStateService.chatMsgState.setAtomByKey({
-                    key: 'CHAT_MSG',
-                    value: initialMessages
-                })
-            }),
-            untilDestroyed(this)
-        ).subscribe()
+        // this.messageTrigger$.pipe(
+        //     tap((initialMessages: Record<string, ChatMessage[]>) => {
+        //         initialMessages && AtomStateService.chatMsgState.setAtomByKey({
+        //             key: 'CHAT_MSG',
+        //             value: initialMessages
+        //         })
+        //     }),
+        //     untilDestroyed(this)
+        // ).subscribe()
 
         // AtomStateService.tasksState.setAtomByKey({
         //     key: 'TASKS',

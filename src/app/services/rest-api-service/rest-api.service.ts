@@ -12,7 +12,8 @@ import { ErrorHelper } from "../../helpers/error.helper";
 import { TaskResponse } from "../../models/task.models";
 import { ChatListResponse, ChatMessageResponse} from "../../models/chatList.models";
 import { TaskComment } from "../../models/comments.model";
-import {ConverterHelper} from "../../helpers/converter.helper";
+import { ConverterHelper } from "../../helpers/converter.helper";
+import { DataResponse } from "../../models/data.models";
 
 @Injectable({
     providedIn: 'root'
@@ -54,7 +55,7 @@ export class RestApiService {
                 responseType: 'json'
             },
         ).pipe(
-            map((response: UserResponse) => response),
+            map((response: DataResponse<UserResponse>) => response?.data),
             finalize(() => loadingId && LoadingService.finishLoadingById(loadingId)),
         );
     }

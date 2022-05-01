@@ -3,8 +3,8 @@ import { TooltipAction } from "../models/ui.models";
 import { FormGroup } from "@angular/forms";
 import { Dashboard, DashboardResponse } from "../models/dashboards.models";
 import { Task, TaskResponse } from "../models/task.models";
-import { User, UserResponse } from "../models/user.models";
-import {ChatList, ChatListInput, ChatListResponse, ChatMessage, ChatMessageResponse} from "../models/chatList.models";
+import { User, UserInput, UserResponse } from "../models/user.models";
+import { ChatList, ChatListInput, ChatListResponse, ChatMessage, ChatMessageResponse } from "../models/chatList.models";
 
 export class ConverterHelper {
     public static transitionToTooltipAction(transitions: Transition[]): TooltipAction[] {
@@ -17,7 +17,7 @@ export class ConverterHelper {
         }))
     }
 
-    public static convertFormToUserPayload(form: FormGroup): UserResponse {
+    public static convertFormToUserPayload(form: FormGroup): UserInput {
         if (!form) {
             return null;
         }
@@ -26,7 +26,7 @@ export class ConverterHelper {
             lastName: form.controls.lastName?.value,
             login: form.controls.login?.value,
             password: form.controls.password?.value,
-            profileIcon: form.controls.profileIcon?.value,
+            avatarUrl: form.controls.profileIcon?.value,
         }
     }
 
@@ -98,7 +98,7 @@ export class ConverterHelper {
             projectTitle: dashboard.title,
             id: dashboard.dashboardId,
             reporter: dashboard.createdBy,
-            assignee: dashboard.team?.map((user: UserResponse) => user.userId),
+            assignee: dashboard.team?.map((user: UserResponse) => user.id),
             description: dashboard.description,
             creationDate: new Date(dashboard.creationDate)?.toISOString(),
             updateDate: new Date(dashboard.modificationDate)?.toISOString(),
@@ -130,11 +130,11 @@ export class ConverterHelper {
             return null;
         }
         return {
-            id: user.userId,
+            id: user.id,
             userInfo: {
                 firstName: user.firstName,
                 lastName: user.lastName,
-                profileIcon: user.profileIcon
+                profileIcon: user.avatarUrl
             }
         }
     }
@@ -146,7 +146,7 @@ export class ConverterHelper {
         return {
             chartId: chat.chartId,
             createTime: chat.createTime,
-            createdBy: ConverterHelper.convertUserResponseToUser(chat.users?.find((user: UserResponse) => user.userId === chat.createdBy)),
+            createdBy: ConverterHelper.convertUserResponseToUser(chat.users?.find((user: UserResponse) => user.id === chat.createdBy)),
             deletionTime: chat.deletionTime,
             titleChat: chat.titleChat,
             users: chat.users?.map((user: UserResponse) => ConverterHelper.convertUserResponseToUser(user)),

@@ -91,6 +91,7 @@
 @card-border_active:            @one-pixel solid @c-card-border_active;
 
 @card-box-shadow:               0 0 16px rgba(121, 121, 121, 0.20);
+@popup-box-shadow:              0 0 30px rgba(0, 0, 0, 0.1);
 
 @base-border-radius:            @space-x6;
 @parameter-border-radius:       @space-x2;
@@ -249,4 +250,12 @@
     &:active {
         border: @card-border_active;
     }
+}
+
+// -- popup shadow -- //
+.popup-common-style() {
+    background: @c-popup-background;
+    box-shadow: @popup-box-shadow;
+    backdrop-filter: blur(90px);
+    border-radius: @base-border-radius;
 }

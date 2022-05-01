@@ -6,11 +6,12 @@
     <div class="login__window">
 
         <div class="login__window__title">
-            <p>Welcome to TMS</p>
+            <p>Connor LAB</p>
         </div>
 
         <form [formGroup]="formGroup" class="login__window__info">
             <tui-input
+                tuiMode="onDark"
                 class="login__window__info__input"
                 formControlName="login"
                 [class._error]="formGroup.controls.login.errors && formGroup.controls.login.touched"
@@ -18,6 +19,7 @@
             >Login</tui-input>
 
             <tui-input-password
+                tuiMode="onDark"
                 class="login__window__info__input"
                 formControlName="password"
                 [class._error]="formGroup.controls.password.errors && formGroup.controls.password.touched"
