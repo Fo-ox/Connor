@@ -7,13 +7,15 @@
     <div class="navigation__user-info" *ngIf="async.user?.userInfo">
         <app-avatar class="navigation__user-info__icon"
                     [avatarUrl]="async.user.userInfo.profileIcon"
+                    [borderRadius]="'100%'"
         ></app-avatar>
         <ng-container *ngIf=" async.displayUserName">
-            <p class="navigation__user-info__hello">{{ 'Hello,' }}&nbsp;</p>
-            <span class="navigation__user-info__hello _action-text">
+            <div class="navigation__user-info__text">
+                <p class="navigation__user-info__text__hello">{{ 'Hello,' }}&nbsp;</p>
+                <span class="navigation__user-info__text__hello _action-text">
                 {{ async.displayUserName }}
-            </span>
-            <p class="navigation__user-info__hello">{{ '!' }}</p>
+                </span>
+            </div>
         </ng-container>
     </div>
 
@@ -21,15 +23,15 @@
         <p class="navigation__links__dashboard"
            (tap)=onDashboardsNavigate()
         >
-            My Dashboards
+            Connor Lab
         </p>
     </div>
 
     <div class="navigation__tools">
-        <app-search class="navigation__tools__search"></app-search>
-        <button class="navigation__tools__settings" (tap)="openDialog(createUser)">
-            <svg-icon [key]="'add-user'" [size]="'md'"></svg-icon>
-        </button>
+<!--        <app-search class="navigation__tools__search"></app-search>-->
+<!--        <button class="navigation__tools__settings" (tap)="openDialog(createUser)">-->
+<!--            <svg-icon [key]="'add-user'" [size]="'md'"></svg-icon>-->
+<!--        </button>-->
         <button class="navigation__tools__logout" (tap)="onLogout()">
             <svg-icon [key]="'logout'" [size]="'sm'"></svg-icon>
         </button>

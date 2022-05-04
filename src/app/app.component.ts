@@ -48,22 +48,22 @@ export class AppComponent implements OnInit, OnDestroy {
                 }
                 // this.socketService._connectMessage();
                 // this.socketService._connectChat();
-                // this.restApiService.loadUsers()
-                //     .pipe(
-                //         tap((users: UserResponse[]) => {
-                //             AtomStateService.systemUsersState.setAtomByKey({
-                //                 key: 'SYSTEM_USERS',
-                //                 value: users?.map((user: UserResponse) => {
-                //                     return ConverterHelper.convertUserResponseToUser(user)
-                //                 })
-                //             })
-                //             AtomStateService.thisUserState.setAtomByKey({
-                //                 key: 'THIS_USER',
-                //                 value: ConverterHelper.convertUserResponseToUser(users
-                //                     ?.find((user: UserResponse) => user.userId === sessionUser.userId))
-                //             })
-                //         })
-                //     ).subscribe();
+                this.restApiService.loadUsers()
+                    .pipe(
+                        tap((users: UserResponse[]) => {
+                            AtomStateService.systemUsersState.setAtomByKey({
+                                key: 'SYSTEM_USERS',
+                                value: users?.map((user: UserResponse) => {
+                                    return ConverterHelper.convertUserResponseToUser(user)
+                                })
+                            })
+                            AtomStateService.thisUserState.setAtomByKey({
+                                key: 'THIS_USER',
+                                value: ConverterHelper.convertUserResponseToUser(users
+                                    ?.find((user: UserResponse) => user.id === sessionUser.userId))
+                            })
+                        })
+                    ).subscribe();
 
                 // this.restApiService.loadDashboards()
                 //     .pipe(

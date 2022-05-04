@@ -9,4 +9,6 @@ export type IconNameSubset<
 export * from './svg-multi-color/cpm-background-1.icon';
 export * from './svg-multi-color/cpm-background-login.icon';
 export * from './svg-multi-color/cpm-background.icon';
+export * from './svg-multi-color/cpm-bg-rad.icon';
+export * from './svg-multi-color/cpm-connor-logo.icon';
 export * from './svg-multi-color/my-icons.model';

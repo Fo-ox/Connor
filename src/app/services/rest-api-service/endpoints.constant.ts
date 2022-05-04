@@ -5,7 +5,7 @@ export const SOCKET: string = CERTIFICATE + DOMAIN + '/ws';
 
 export enum Endpoints {
     LOGIN = '/user/authorise',
-    GET_USERS = '/user/getAll',
+    GET_USERS = '/user/users',
     CREATE_USER = '/user/create',
     GET_DASHBOARDS = '/dashboards/getAll',
     CREATE_DASHBOARD = '/dashboards/create',

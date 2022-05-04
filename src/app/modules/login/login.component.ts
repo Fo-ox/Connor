@@ -64,7 +64,7 @@ export class LoginComponent {
                             userToken: response.access_token
                         }
                     })
-                    this.routingService.navigate(RouteLinks.DASHBOARDS);
+                    this.routingService.navigate(RouteLinks.PREDICTION);
                 }),
                 catchError(() => {
                     this.invalid = true;

@@ -61,6 +61,12 @@
 @c-accent-text_hover:       darken(@c-accent-text, 5%);
 @c-accent-text_active:      darken(@c-accent-text, 5%);
 
+.c-accent-grad-text() {
+    background: linear-gradient(87.58deg, #CFCCFF 4.05%, #FF7F6D 44.63%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 @c-actions:                 @accent-violet;
 @c-sub-actions:             @light-violet;
 
@@ -82,4 +88,5 @@
 @c-icon-default-color:      @accent-gray;
 
 @c-popup-background:        fade(@dark-theme, 70%);
+@c-dashboard-background:    fade(@dark-theme, 80%);
 
