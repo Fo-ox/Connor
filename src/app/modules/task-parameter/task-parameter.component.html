@@ -6,7 +6,7 @@
 } as async">
 
 <div class="task-parameter">
-    <p class="task-parameter__key">
+    <p class="task-parameter__key" *ngIf="!hideKey">
         {{ parameterKey }}
     </p>
     <div class="task-parameter__value">

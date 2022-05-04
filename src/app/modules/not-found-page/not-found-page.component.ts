@@ -11,6 +11,6 @@ export class NotFoundPageComponent {
     constructor(private routingService: RoutingService) { }
 
     onDashboardsNavigate(): void {
-        this.routingService.navigate(RouteLinks.DASHBOARDS);
+        this.routingService.navigate(RouteLinks.PREDICTION);
     }
 }

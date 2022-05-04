@@ -1,0 +1,44 @@
+<ng-container *ngIf="{
+    userTemplate: userTemplate$ | async,
+    users: users$ | async
+} as async">
+
+<div class="task-table">
+    <tui-scrollbar class="_scroll-container">
+        <div class="_scroll-content">
+            <table
+                tuiTable
+                [columns]="columns"
+            >
+                <thead>
+                    <tr tuiThGroup>
+                        <th *tuiHead="'task'" tuiTh> Task </th>
+                        <th *tuiHead="'estimate'" tuiTh> Estimate </th>
+                        <th *tuiHead="'assignee'" tuiTh> Assignee </th>
+                        <th *tuiHead="'status'" tuiTh> Status </th>
+                    </tr>
+                </thead>
+
+                <tbody tuiTbody [data]="tasks">
+                    <tr *tuiRow="let task of tasks" tuiTr>
+                        <td *tuiCell="'task'" tuiTd class="table-column _task">{{ task.title }}</td>
+                        <td *tuiCell="'estimate'" tuiTd class="table-column _estimate"></td>
+                        <td *tuiCell="'assignee'" tuiTd class="table-column _assignee">
+                            <ng-container *ngIf="async.users | arrayProto:'find': 'id': task.assignee as user">
+                                <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
+                            </ng-container>
+                        </td>
+                        <td *tuiCell="'status'" tuiTd class="table-column _status">
+                            <task-parameter [parameterName]="'status'"
+                                            [parameterValue]="task?.status"
+                                            [hideKey]="true"
+                            ></task-parameter>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </tui-scrollbar>
+</div>
+
+</ng-container>

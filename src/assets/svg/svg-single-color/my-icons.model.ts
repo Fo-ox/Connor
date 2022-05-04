@@ -12,6 +12,7 @@ export type SingleColorIcon =
   | 'dialog-sending'
   | 'dialog'
   | 'edit'
+  | 'filter'
   | 'logout'
   | 'more'
   | 'search'

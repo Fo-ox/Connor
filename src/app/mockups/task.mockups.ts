@@ -9,7 +9,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "NORMAL",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b8079c",
-        "assignee": "3c918f2d-dc69-4338-9f5b-b4ac69b80791",
+        "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -38,8 +38,8 @@ export const TASKS = JSON.parse(`[
         "title": "[TMS UI] Fix loading bug in send button",
         "description": "Some description",
         "priority": "LOW",
-        "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80791",
-        "assignee": "27f9e3f0-24ed-442c-9904-634e26e62783",
+        "reporter": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
+        "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -54,7 +54,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "LOW",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80793",
-        "assignee": "3c918f2d-dc69-4338-9f5b-b4ac69b80793",
+        "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -68,8 +68,8 @@ export const TASKS = JSON.parse(`[
         "title": "[TMS UI] Fix loading bug in send button",
         "description": "Some description",
         "priority": "LOW",
-        "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80791",
-        "assignee": "27f9e3f0-24ed-442c-9904-634e26e62783",
+        "reporter": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
+        "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -84,7 +84,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "LOW",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80793",
-        "assignee": "27f9e3f0-24ed-442c-9904-634e26e62783",
+        "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -99,7 +99,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "LOW",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b8079c",
-        "assignee": "3c918f2d-dc69-4338-9f5b-b4ac69b80792",
+        "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -114,7 +114,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "LOW",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80792",
-        "assignee": "27f9e3f0-24ed-442c-9904-634e26e62783",
+        "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -129,7 +129,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "CRITICAL",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b8079c",
-        "assignee": "3c918f2d-dc69-4338-9f5b-b4ac69b80793",
+        "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null
@@ -159,7 +159,7 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "CRITICAL",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b80792",
-        "assignee": "27f9e3f0-24ed-442c-9904-634e26e62783",
+        "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
         "resolveDate": null

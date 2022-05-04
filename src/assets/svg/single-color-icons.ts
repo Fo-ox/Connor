@@ -17,6 +17,7 @@ export * from './svg-single-color/cpm-dashboard.icon';
 export * from './svg-single-color/cpm-dialog-sending.icon';
 export * from './svg-single-color/cpm-dialog.icon';
 export * from './svg-single-color/cpm-edit.icon';
+export * from './svg-single-color/cpm-filter.icon';
 export * from './svg-single-color/cpm-logout.icon';
 export * from './svg-single-color/cpm-more.icon';
 export * from './svg-single-color/cpm-search.icon';

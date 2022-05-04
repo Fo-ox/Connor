@@ -1,0 +1,51 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+tbody {
+    border-color: transparent;
+}
+
+tr, td, th {
+    background: transparent;
+}
+
+td, th {
+    word-break: break-word;
+    border-color: transparent;
+}
+
+.task-table {
+    height: 100%;
+}
+
+.table-column {
+    padding: @items-min-space;
+    border-top: @table-border;
+
+    &._task {
+        .font-15-semibold;
+        min-width: 180px;
+        max-width: 100%;
+    }
+
+    &._estimate {
+        min-width: 100px;
+    }
+
+    &._assignee {
+        min-width: 150px;
+    }
+
+    &._status {
+        min-width: 120px;
+    }
+}
+
+._scroll-container {
+    .scroll-container;
+}
+
+._scroll-content {
+    .scroll-content;
+};
