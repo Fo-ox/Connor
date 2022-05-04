@@ -1,10 +1,11 @@
-export const CERTIFICATE: string = 'http://';
-export const DOMAIN: string = 'localhost:8080';
+export const CERTIFICATE: string = 'https://';
+// export const DOMAIN: string = 'localhost:3000';
+export const DOMAIN: string = 'connor-server.herokuapp.com';
 export const SOCKET: string = CERTIFICATE + DOMAIN + '/ws';
 
 export enum Endpoints {
-    LOGIN = '/user/login',
-    GET_USERS = '/user/getAll',
+    LOGIN = '/user/authorise',
+    GET_USERS = '/user/users',
     CREATE_USER = '/user/create',
     GET_DASHBOARDS = '/dashboards/getAll',
     CREATE_DASHBOARD = '/dashboards/create',

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@
 import { TuiNotification, TuiNotificationsService } from "@taiga-ui/core";
 import { of, Subscription } from "rxjs";
 import { AtomStateService } from "../../services/atom-state/app-atom-state.service";
-import { switchMap } from "rxjs/operators";
+import { delay, switchMap } from "rxjs/operators";
 import { Notification } from "../../models/ui.models";
 
 @Component({
@@ -19,6 +19,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.notificationSubscription = this.notification.pipe(
+            delay(200),
             switchMap((notification: Notification) => notification
                 ? this.notificationsService.show(notification?.notificationContent, {
                     label: notification?.notificationTitle,
@@ -28,7 +29,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
                     status: notification?.notificationType || TuiNotification.Info
                 })
                 : of(null)
-            )
+            ),
         ).subscribe();
     }
 

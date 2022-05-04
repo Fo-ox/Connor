@@ -36,6 +36,7 @@ export class RoutingService {
 }
 
 export enum RouteLinks {
+    PREDICTION = 'prediction',
     DASHBOARDS = 'dashboards',
     DASHBOARDS_DETAIL = 'dashboard-detail',
     USER = 'user',

@@ -139,7 +139,7 @@ export class SocketService implements OnDestroy {
 
     onChatReceived(chat): void {
         const newChats: ChatList[] = JSON.parse(chat.body)
-            ?.filter((chat: ChatListResponse) => chat.users.find((user: UserResponse) => user.userId === RestApiService.getSessionUser().userId))
+            ?.filter((chat: ChatListResponse) => chat.users.find((user: UserResponse) => user.id === RestApiService.getSessionUser().userId))
             ?.map((chat: ChatListResponse) => ConverterHelper.convertChatResponseToChat(chat))
             ?.sort((curr: ChatList, next: ChatList) => +new Date(next.createTime) - +new Date(curr.createTime));
 

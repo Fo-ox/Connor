@@ -17,10 +17,11 @@ import { getAllIcons, ICON_CONFIGURATION } from "../assets/svg/svg-icons-configu
 import { RoutingService } from "./services/routing-service/routing.service";
 import { TemplateInstancesModule } from "./templates/template-instances.module";
 import { RestApiService } from "./services/rest-api-service/rest-api.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NotificationModule } from "./modules/notification/notification.module";
 import { POLYMORPHEUS_CONTEXT, PolymorpheusModule } from "@tinkoff/ng-polymorpheus";
-import {SocketService} from "./services/socket-server/socket.service";
+import { SocketService } from "./services/socket-server/socket.service";
+import { ErrorInterceptor } from "./utils/error.interceptor";
 
 @NgModule({
     declarations: [
@@ -48,7 +49,12 @@ import {SocketService} from "./services/socket-server/socket.service";
         {provide: POLYMORPHEUS_CONTEXT, useClass:PolymorpheusModule},
         RoutingService,
         RestApiService,
-        SocketService
+        SocketService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
+            multi: true,
+        },
     ],
     bootstrap: [AppComponent]
 })

@@ -10,6 +10,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/dashboards/dashboards.module').then(m => m.DashboardsModule)
     },
     {
+        path: RouteLinks.PREDICTION,
+        canActivate: [AuthorisationGuard],
+        loadChildren: () => import('./modules/prediction/prediction.module').then(m => m.PredictionModule)
+    },
+    {
         path: RouteLinks.DASHBOARDS_DETAIL,
         canActivate: [AuthorisationGuard],
         loadChildren: () => import('./modules/dashboard-detail/dashboard-detail.module').then(m => m.DashboardDetailModule)

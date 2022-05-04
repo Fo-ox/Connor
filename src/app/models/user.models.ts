@@ -9,15 +9,19 @@ export type UserInfo = {
     profileIcon?: string;
 }
 
-export type UserResponse = {
-    userId?: string;
-    userToken?: string;
-    firstName?: string;
+export interface UserResponse {
+    id?: string;
+    role?: string;
+    firstName: string;
     lastName?: string;
-    login?: string;
-    password?: string;
-    profileIcon?: string;
-    status?: string;
+    email?: null,
+    avatarUrl?: string;
+    hardSkillsLevel?: string;
+}
+
+export interface UserInput extends UserResponse {
+    login: string;
+    password: string;
 }
 
 export type SessionUser = {

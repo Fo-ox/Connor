@@ -8,6 +8,7 @@ import { AtomStateService } from "../../services/atom-state/app-atom-state.servi
 import { GenerateHelper } from "../../helpers/generate.helper";
 import { LoadingService } from "../../services/loading-service/loading.service";
 import { UserResponse } from "../../models/user.models";
+import { Token } from "../../models/data.models";
 
 @Component({
     selector: 'app-login',
@@ -51,19 +52,19 @@ export class LoginComponent {
                 this.formGroup.controls.password.value,
                 this.loadingStarter$.value
             ).pipe(
-                tap((response: UserResponse) => {
+                tap((response: UserResponse & Token) => {
                     RestApiService.saveSessionUser({
-                        userToken: response.userToken,
-                        userId: response.userId
+                        userToken: response.access_token,
+                        userId: response.id
                     });
                     AtomStateService.tokenState.setAtomByKey({
                         key: 'TOKEN',
                         value: {
-                            userId: response.userId,
-                            userToken: response.userToken
+                            userId: response.id,
+                            userToken: response.access_token
                         }
                     })
-                    this.routingService.navigate(RouteLinks.DASHBOARDS);
+                    this.routingService.navigate(RouteLinks.PREDICTION);
                 }),
                 catchError(() => {
                     this.invalid = true;

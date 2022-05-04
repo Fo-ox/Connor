@@ -28,29 +28,44 @@
 @light-sky:                 #EDF6FE;
 @accent-sky:                #70B6F6;
 
+// Connor base
+
+@dark-theme:                #16161A;
+@pigeon-dark:               #23242B;
+@pigeon:                    #393A46;
+@pigeon-light:              #747D96;
+
+@space-fox:                 #5959FF;
+
 // -- base project colors --
-@c-base-background:         @base-gray;
+@c-base-background:         @pigeon-dark;
 
-@c-primary-button:          @support-violet;
-@c-primary-button_disabled: lighten(@c-primary-button, 3%);
-@c-primary-button_hover:    darken(@c-primary-button, 5%);
-@c-primary-button_active:   darken(@c-primary-button, 15%);
+@c-primary-button:          @space-fox;
+@c-primary-button_disabled: darken(@c-primary-button, 3%);
+@c-primary-button_hover:    lighten(@c-primary-button, 5%);
+@c-primary-button_active:   lighten(@c-primary-button, 15%);
 
-@c-secondary-button:        @support-gray;
-@c-secondary-button_hover:  darken(@c-secondary-button, 5%);
-@c-secondary-button_active: darken(@c-secondary-button, 15%);
+@c-secondary-button:        @pigeon;
+@c-secondary-button_hover:  lighten(@c-secondary-button, 5%);
+@c-secondary-button_active: lighten(@c-secondary-button, 15%);
 
-@c-main-text:               @accent-carbon;
-@c-main-text_hover:         @total-black;
-@c-main-text_active:        @total-black;
+@c-main-text:               @total-white;
+@c-main-text_hover:         fade(@total-white, 90%);
+@c-main-text_active:        fade(@total-white, 90%);
 
-@c-additional-text:         @accent-gray;
-@c-additional-text_hover:   darken(@c-additional-text, 5%);
-@c-additional-text_active:  darken(@c-additional-text, 15%);
+@c-additional-text:         fade(@total-white, 80%);
+@c-additional-text_hover:   fade(@total-white, 70%);
+@c-additional-text_active:  fade(@total-white, 70%);
 
 @c-accent-text:             @accent-violet;
 @c-accent-text_hover:       darken(@c-accent-text, 5%);
 @c-accent-text_active:      darken(@c-accent-text, 5%);
+
+.c-accent-grad-text() {
+    background: linear-gradient(87.58deg, #CFCCFF 4.05%, #FF7F6D 44.63%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 @c-actions:                 @accent-violet;
 @c-sub-actions:             @light-violet;
@@ -72,4 +87,6 @@
 @c-icon-default-background: @support-gray;
 @c-icon-default-color:      @accent-gray;
 
+@c-popup-background:        fade(@dark-theme, 70%);
+@c-dashboard-background:    fade(@dark-theme, 80%);
 

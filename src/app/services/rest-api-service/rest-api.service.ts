@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { CERTIFICATE, DOMAIN, Endpoints } from "./endpoints.constant";
 import { SessionUser, UserResponse } from "../../models/user.models";
@@ -12,7 +12,8 @@ import { ErrorHelper } from "../../helpers/error.helper";
 import { TaskResponse } from "../../models/task.models";
 import { ChatListResponse, ChatMessageResponse} from "../../models/chatList.models";
 import { TaskComment } from "../../models/comments.model";
-import {ConverterHelper} from "../../helpers/converter.helper";
+import { ConverterHelper } from "../../helpers/converter.helper";
+import { DataResponse } from "../../models/data.models";
 
 @Injectable({
     providedIn: 'root'
@@ -45,6 +46,12 @@ export class RestApiService {
         return CERTIFICATE + DOMAIN + endpoint;
     }
 
+    public static getAuthorizationHeaders(): HttpHeaders {
+        const token = RestApiService.getSessionUser().userToken;
+        return new HttpHeaders()
+            .append('Authorization', 'Bearer ' + token);
+    }
+
     public login(login: string, password: string, loadingId?: string): Observable<UserResponse> {
         loadingId && LoadingService.startLoadingById(loadingId);
         return this.http.get(
@@ -54,14 +61,17 @@ export class RestApiService {
                 responseType: 'json'
             },
         ).pipe(
-            map((response: UserResponse) => response),
+            map((response: DataResponse<UserResponse>) => response?.data),
             finalize(() => loadingId && LoadingService.finishLoadingById(loadingId)),
         );
     }
 
     public loadUsers(): Observable<UserResponse[]> {
-        return this.http.get(RestApiService.getUrl(Endpoints.GET_USERS)).pipe(
-            map((response: UserResponse[]) => response),
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_USERS),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<UserResponse[]>) => response?.data),
             catchError((error: HttpErrorResponse) => {
                 AtomStateService.notificationState.setAtomByKey({
                     key: 'NOTIFICATION',
