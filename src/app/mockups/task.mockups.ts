@@ -12,7 +12,9 @@ export const TASKS = JSON.parse(`[
         "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 18,
+        "initialEstimateId": "EASY"
     },
     {
         "id": "1e4e4e93-58bf-4eb7-b765-3d14612a6dc6",
@@ -24,10 +26,12 @@ export const TASKS = JSON.parse(`[
         "description": "Some description",
         "priority": "LOW",
         "reporter": "3c918f2d-dc69-4338-9f5b-b4ac69b8079c",
-        "assignee": "3c918f2d-dc69-4338-9f5b-b4ac69b80793",
+        "assignee": null,
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 24,
+        "initialEstimateId": "MEDIUM"
     },
     {
         "id": "1e4e4e93-58bf-4eb7-b765-3d14612a6d45",
@@ -42,7 +46,9 @@ export const TASKS = JSON.parse(`[
         "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 4,
+        "initialEstimateId": "MEDIUM"
     },
     {
         "id": "1e4e4e93-58bf-4eb7-b765-3d14612a6dc7",
@@ -72,7 +78,10 @@ export const TASKS = JSON.parse(`[
         "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 4,
+        "resolvedEstimate": 5,
+        "initialEstimateId": "EASY"
     },
     {
         "id": "1e4e4e93-58bf-4eb7-b765-3d14612a6dc9",
@@ -87,7 +96,9 @@ export const TASKS = JSON.parse(`[
         "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 44,
+        "initialEstimateId": "MEDIUM"
     },
     {
         "id": "1e4e4e93-58bf-4eb7-b765-3d14612a6dc1",
@@ -117,7 +128,9 @@ export const TASKS = JSON.parse(`[
         "assignee": "d4fcb59b-e7c4-41eb-aabe-e0148b1de2db",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 300,
+        "initialEstimateId": "HARD"
     },
     {
         "id": "81b1c47d-f143-4d37-9473-18f8dcbac580",
@@ -147,7 +160,10 @@ export const TASKS = JSON.parse(`[
         "assignee": "",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 24,
+        "resolvedEstimate": 20,
+        "initialEstimateId": "EASY"
     },
     {
         "id": "81b1c47d-f143-4d37-9473-18f8dcbac580",
@@ -162,7 +178,9 @@ export const TASKS = JSON.parse(`[
         "assignee": "8071c23f-527e-47af-9b4e-2e4f6860d16e",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 12,
+        "initialEstimateId": "EASY"
     },
     {
         "id": "81b1c47d-f143-4d37-9473-18f8dcbac581",
@@ -177,6 +195,8 @@ export const TASKS = JSON.parse(`[
         "assignee": "",
         "creationDate": "2021-11-18T23:30:24.060Z",
         "updateDate": null,
-        "resolveDate": null
+        "resolveDate": null,
+        "predictEstimate": 1,
+        "initialEstimateId": "EASY"
     }
 ]`)

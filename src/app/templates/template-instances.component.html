@@ -61,10 +61,32 @@
 <ng-template #parameterEstimate
              let-data=data
 >
-    <div class="parameter-estimate" *ngIf="data.id else parameterEmpty">
-        <svg-icon [key]="'estimate'"></svg-icon>
-        <p class="parameter-estimate__count">
-            {{ data?.userInfo?.firstName + ' ' + data?.userInfo?.lastName }}
-        </p>
+    <div class="parameter-estimate" *ngIf="data">
+        <div class="parameter-estimate__resolved"
+             *ngIf="data.resolvedEstimate"
+        >
+            <svg-icon [key]="'d-type-default'" [size]="'sm'"></svg-icon>
+            <p class="parameter-estimate__resolved__count"> {{ data?.resolvedEstimate | displayEstimate }} </p>
+        </div>
+
+        <div class="parameter-estimate__predict"
+             *ngIf="data.predictEstimate"
+        >
+            <svg-icon [key]="'estimate'" [size]="'sm'"></svg-icon>
+            <p class="parameter-estimate__predict__count"
+               [style.background-color]="data.assignee && data.initialEstimateId
+                ? 'rgba(' + getEstimateColor(data.initialEstimateId) + ', 0.4)'
+                : '#23242B'"
+               [style.color]="data.assignee && data.initialEstimateId
+                ? 'rgb(' + getEstimateColor(data.initialEstimateId) +')'
+                : '#797988'"
+            >
+                {{ data?.predictEstimate | displayEstimate }}
+            </p>
+        </div>
+
+        <ng-container *ngIf="!data.resolvedEstimate && !data.predictEstimate">
+            <ng-container [ngTemplateOutlet]="parameterEmpty"></ng-container>
+        </ng-container>
     </div>
 </ng-template>

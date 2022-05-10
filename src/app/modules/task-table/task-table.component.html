@@ -1,5 +1,6 @@
 <ng-container *ngIf="{
     userTemplate: userTemplate$ | async,
+    estimateTemplate: estimateTemplate$ | async,
     users: users$ | async
 } as async">
 
@@ -13,7 +14,7 @@
                 <thead>
                     <tr tuiThGroup>
                         <th *tuiHead="'task'" tuiTh> Task </th>
-                        <th *tuiHead="'estimate'" tuiTh> Estimate </th>
+                        <th *tuiHead="'estimate'" [sorter]="estimateSorter" tuiTh> Estimate </th>
                         <th *tuiHead="'assignee'" tuiTh> Assignee </th>
                         <th *tuiHead="'status'" tuiTh> Status </th>
                     </tr>
@@ -22,7 +23,10 @@
                 <tbody tuiTbody [data]="tasks">
                     <tr *tuiRow="let task of tasks" tuiTr>
                         <td *tuiCell="'task'" tuiTd class="table-column _task">{{ task.title }}</td>
-                        <td *tuiCell="'estimate'" tuiTd class="table-column _estimate"></td>
+                        <td *tuiCell="'estimate'" tuiTd class="table-column _estimate">
+                            <ng-container *ngTemplateOutlet="async.estimateTemplate; context: {data: task}">
+                            </ng-container>
+                        </td>
                         <td *tuiCell="'assignee'" tuiTd class="table-column _assignee">
                             <ng-container *ngIf="async.users | arrayProto:'find': 'id': task.assignee as user">
                                 <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
