@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SvgIconsModule } from "@ngneat/svg-icon";
 import { TemplateInstances } from "./template-instances.component";
 import { AvatarModule } from "../modules/avatar/avatar.module";
+import { DisplayEstimatePipeModule } from "../pipes/display-estimate-pipe/display-estimate-pipe.module";
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { AvatarModule } from "../modules/avatar/avatar.module";
     imports: [
         CommonModule,
         SvgIconsModule,
-        AvatarModule
+        AvatarModule,
+        DisplayEstimatePipeModule
     ]
 })
 export class TemplateInstancesModule { }

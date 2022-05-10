@@ -5,5 +5,71 @@
 .prediction-dashboard {
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     .dashboard-common-style;
+    padding: @space-x16 @space-x20;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: @space-x20;
+
+        &-title {
+            .font-32-extrabold;
+            color: @c-main-text;
+        }
+
+        &-tools {
+            display: flex;
+            flex-wrap: wrap;
+
+            &__filter {
+                margin: @space-x2 @items-min-space @space-x2 0;
+                min-width: 50px;
+                min-height: 44px;
+                max-width: min-content;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .dark-input-styles;
+
+                &-count {
+                    margin-right: @item-flex-gap;
+                    .font-15-regular;
+                }
+            }
+
+            &__preview {
+                margin: @space-x2 @items-min-space @space-x2 0;
+                min-width: 190px;
+                --tui-base-03: @pigeon-dark;
+            }
+
+            &__date {
+                margin: @space-x2 0;
+                min-width: 250px;
+                --tui-base-03: @pigeon-dark;
+            }
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+
+        &__table {
+            flex: 1;
+            display: block;
+            height: 100%;
+        }
+
+        &__graphic {
+            flex: 1;
+        }
+    }
 }

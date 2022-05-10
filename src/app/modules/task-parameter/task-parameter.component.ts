@@ -28,6 +28,7 @@ export class TaskParameterComponent implements OnChanges, OnInit {
     @Input() parameterValue: string;
     @Input() editable: boolean = false;
     @Input() dashboard: Dashboard;
+    @Input() hideKey: boolean = false;
 
     @Output() parameterValueChanges: EventEmitter<string> = new EventEmitter();
 

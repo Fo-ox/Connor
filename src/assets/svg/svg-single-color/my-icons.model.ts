@@ -12,6 +12,8 @@ export type SingleColorIcon =
   | 'dialog-sending'
   | 'dialog'
   | 'edit'
+  | 'estimate'
+  | 'filter'
   | 'logout'
   | 'more'
   | 'search'

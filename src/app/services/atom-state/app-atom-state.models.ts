@@ -24,7 +24,8 @@ export type TemplatesAtomState = AtomTemplateParameterType
     | AtomTemplateParameterEmpty
     | AtomTemplateParameterUser
     | AtomTemplateParameterValue
-    | AtomTemplateParameterDate;
+    | AtomTemplateParameterDate
+    | AtomTemplateParameterEstimate;
 
 export type AtomKeys =
     'THIS_USER'
@@ -49,7 +50,8 @@ export type AtomKeys =
     | 'TEMPLATE_PARAMETER_PRIORITY'
     | 'TEMPLATE_PARAMETER_EMPTY'
     | 'TEMPLATE_PARAMETER_DATE'
-    | 'TEMPLATE_PARAMETER_USER';
+    | 'TEMPLATE_PARAMETER_USER'
+    | 'TEMPLATE_PARAMETER_ESTIMATE';
 
 export type AtomThisUser = Atom<'THIS_USER', User>;
 export type AtomSystemUsers = Atom<'SYSTEM_USERS', User[]>;
@@ -74,3 +76,4 @@ export type AtomTemplateParameterPriority = Atom<'TEMPLATE_PARAMETER_PRIORITY', 
 export type AtomTemplateParameterEmpty = Atom<'TEMPLATE_PARAMETER_EMPTY', TemplateRef<any>>;
 export type AtomTemplateParameterUser = Atom<'TEMPLATE_PARAMETER_USER', TemplateRef<any>>;
 export type AtomTemplateParameterDate = Atom<'TEMPLATE_PARAMETER_DATE', TemplateRef<any>>;
+export type AtomTemplateParameterEstimate = Atom<'TEMPLATE_PARAMETER_ESTIMATE', TemplateRef<any>>;

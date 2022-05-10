@@ -126,7 +126,7 @@ export class TaskDetailComponent implements OnChanges {
         this.taskChanges = false
     }
 
-    onDraftTaskUpdate(value: string, key: keyof Task) {
+    onDraftTaskUpdate(value: string, key: string) {
         this.draftTaskUI[key] = value;
         this.taskChanges = true
     }

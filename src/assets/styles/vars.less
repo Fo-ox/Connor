@@ -93,10 +93,13 @@
 @card-border_hover:             @one-pixel solid @c-card-border_hover;
 @card-border_active:            @one-pixel solid @c-card-border_active;
 
+@table-border:                  @one-pixel solid @pigeon-dark;
+
 @icon-border:                   @base-space solid @support-gray;
 
 @card-box-shadow:               0 0 16px rgba(121, 121, 121, 0.20);
 @popup-box-shadow:              0 0 30px rgba(0, 0, 0, 0.1);
+@input-box-shadow:              0 0.125rem 0.1875rem rgb(0 0 0 / 10%);
 
 @base-border-radius:            @space-x6;
 @parameter-border-radius:       @space-x2;
@@ -272,4 +275,11 @@
     box-shadow: @popup-box-shadow;
     backdrop-filter: blur(90px);
     border-radius: @base-border-radius;
+}
+
+.dark-input-styles() {
+    background-color: @pigeon-dark;
+    border-radius: var(--tui-radius-m);
+    box-shadow: @input-box-shadow;
+    cursor: pointer;
 }

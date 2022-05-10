@@ -86,3 +86,34 @@
         color: @c-additional-text;
     }
 }
+
+.parameter-estimate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__predict {
+        display: flex;
+        align-items: center;
+
+        &__count {
+            .font-13-semibold;
+            margin: @item-flex-gap @items-min-space;
+            padding: 0 @space-x3;
+            border-radius: @parameter-border-radius;
+        }
+    }
+
+    &__resolved {
+        display: flex;
+        align-items: center;
+
+        &__count {
+            .font-13-semibold;
+            margin: @item-flex-gap @items-min-space;
+            padding: 0 @space-x3;
+            background-color: @pigeon-dark;
+            border-radius: @parameter-border-radius;
+        }
+    }
+}

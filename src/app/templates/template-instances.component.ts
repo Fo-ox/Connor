@@ -42,6 +42,10 @@ export class TemplateInstances implements AfterViewChecked {
                 key: 'TEMPLATE_PARAMETER_DATE',
                 value: this.parameterDate
             })
+            AtomStateService.templates.setAtomByKey({
+                key: 'TEMPLATE_PARAMETER_ESTIMATE',
+                value: this.parameterEstimate
+            })
         }
         this._isTemplateSet = true;
     }
@@ -52,4 +56,20 @@ export class TemplateInstances implements AfterViewChecked {
     @ViewChild('parameterUser') parameterUser: TemplateRef<any>
     @ViewChild('parameterValue') parameterValue: TemplateRef<any>
     @ViewChild('parameterDate') parameterDate: TemplateRef<any>
+    @ViewChild('parameterEstimate') parameterEstimate: TemplateRef<any>
+
+    public getEstimateColor(initialEstimateId: string): string {
+        switch (initialEstimateId) {
+            case 'EASY': {
+                return '74, 201, 155';
+            }
+            case 'MEDIUM': {
+                return '255, 199, 0';
+            }
+            case 'HARD': {
+                return '244, 87, 37';
+            }
+        }
+        return '35, 36, 43';
+    }
 }
