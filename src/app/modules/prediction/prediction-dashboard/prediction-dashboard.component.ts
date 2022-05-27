@@ -4,6 +4,7 @@ import { PREDICTION_TYPES } from "../../../constants/UI.constants";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { distinctUntilChanged, tap } from "rxjs/operators";
 import isEqual from "lodash.isequal";
+import {TASKS} from "../../../mockups/task.mockups";
 
 @UntilDestroy()
 @Component({
@@ -13,6 +14,8 @@ import isEqual from "lodash.isequal";
 })
 export class PredictionDashboardComponent implements OnInit {
     public formGroup: FormGroup;
+
+    public tasks = TASKS;
 
     public readonly PREDICTION_TYPES = PREDICTION_TYPES;
 

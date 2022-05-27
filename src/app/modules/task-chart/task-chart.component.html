@@ -1,0 +1,50 @@
+<ng-container *ngIf="{
+    chartData: chartData$ | async
+} as async">
+
+<div class="task-chart" *ngIf="async.chartData?.estimates?.length">
+    <tui-ring-chart
+        class="task-chart__ring"
+        size="xl"
+        [value]="async.chartData?.estimates"
+        [content]="content"
+        [(activeItemIndex)]="activeItemIndex"
+    ></tui-ring-chart>
+
+    <div class="task-chart__legend">
+        <div class="task-chart__legend__total">
+            <div class="task-chart__legend__total-header">
+                <p> Total estimate </p>
+                <span> by selected filter </span>
+            </div>
+            <div class="task-chart__legend__total-counter">
+                {{ async.chartData?.totalEstimates | displayEstimate }}
+            </div>
+        </div>
+
+        <div class="task-chart__legend__detail"
+             *ngFor="let label of async.chartData?.labels; let index = index"
+        >
+            <div class="task-chart__legend__detail__info">
+                <div class="task-chart__legend__detail__info-color"
+                      [style.background-color]="getColor(index)"
+                ></div>
+                <span class="task-chart__legend__detail__info-name">
+                    {{ label }}
+                </span>
+            </div>
+
+            <div class="task-chart__legend__detail__count"
+                 [class._active]="activeItemIndex === index"
+            >
+                {{ async.chartData?.estimates?.[index] | displayEstimate }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content>
+    <div class="task-chart__ring__content"> Estimate chart </div>
+</ng-template>
+
+</ng-container>
