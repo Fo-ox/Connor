@@ -1,0 +1,64 @@
+<ng-container *ngIf="{
+} as async">
+
+    <tui-hosted-dropdown
+        class="prediction-tool"
+        [content]="searchContent"
+        [open]="dropdownVisible"
+    >
+        <button class="prediction-tool__icon">
+            <svg-icon [key]="'dashboard'" [size]="'sm'"></svg-icon>
+        </button>
+    </tui-hosted-dropdown>
+
+    <ng-template #searchContent let-activeZone>
+        <div class="prediction-tool__content">
+            <div class="prediction-tool__content__default">
+                <div class="prediction-tool__content__default-header">
+                    Default model
+                </div>
+                <tui-select
+                    [tuiActiveZoneParent]="activeZone"
+                    [tuiTextfieldSize]="'m'"
+                    [(ngModel)]="defaultModel"
+                >
+                    <p>Selected model*</p>
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="['1','2','3']"
+                    ></tui-data-list-wrapper>
+                </tui-select>
+            </div>
+
+            <div class="prediction-tool__content__train">
+                <div class="prediction-tool__content__train-header">
+                    Create new model
+                </div>
+
+                <tui-select
+                    [tuiActiveZoneParent]="activeZone"
+                    [tuiTextfieldSize]="'m'"
+                    [(ngModel)]="taskType"
+                >
+                    <p>Model type*</p>
+                    <tui-data-list-wrapper
+                        *tuiDataList
+                        [items]="['1','2','3']"
+                    ></tui-data-list-wrapper>
+                </tui-select>
+
+                <div class="prediction-tool__content__train-tasks">
+                    <div class="prediction-tool__content__train-tasks__label">
+                        Current task data size
+                    </div>
+                    <div class="prediction-tool__content__train-tasks__value">
+                        248
+                    </div>
+                </div>
+
+                <button class="prediction-tool__content__train-button">Train and publish</button>
+            </div>
+        </div>
+    </ng-template>
+
+</ng-container>

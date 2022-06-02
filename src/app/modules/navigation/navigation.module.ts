@@ -6,7 +6,8 @@ import { SearchModule } from "../search/search.module";
 import { RouterModule } from "@angular/router";
 import { TuiButtonModule } from "@taiga-ui/core";
 import { SvgIconsModule } from "@ngneat/svg-icon";
-import {CreateUserModule} from "../forms/create-user/create-user.module";
+import { CreateUserModule } from "../forms/create-user/create-user.module";
+import { PreditionToolModule } from "../predition-tool/predition-tool.module";
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {CreateUserModule} from "../forms/create-user/create-user.module";
         TuiButtonModule,
         SvgIconsModule,
         CreateUserModule,
+        PreditionToolModule,
     ]
 })
 export class NavigationModule { }
