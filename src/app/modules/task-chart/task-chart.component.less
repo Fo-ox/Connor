@@ -1,0 +1,99 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+@import '~@taiga-ui/core/styles/taiga-ui-local';
+
+:host {
+    --tui-chart-0: @pigeon;
+    --tui-chart-1: #c779d0;
+    --tui-chart-2: #FCBB14;
+    --tui-chart-3: #4bc0c8;
+    --tui-chart-4: #ff5f6d;
+    --tui-chart-5: #9795cd;
+    --tui-chart-6: #8DDA71;
+    --tui-chart-7: #feac5e;
+    --tui-chart-8: #3682DB;
+    --tui-chart-9: #FF8A00;
+}
+
+.task-chart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &__ring {
+        margin: @items-max-space;
+
+        &__content {
+            .font-19-extrabold;
+        }
+    }
+
+    &__legend {
+        width: 300px;
+
+        &__total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: @block-space;
+
+            &-header {
+                p {
+                    .font-19-extrabold;
+                }
+
+                span {
+                    .font-13-medium;
+                    color: @c-additional-text;
+                }
+            }
+
+            &-counter {
+                background: @pigeon-dark;
+                padding: @item-flex-gap @items-max-space;
+                border-radius: @base-border-radius;
+                .font-24-semibold;
+            }
+        }
+
+        &__detail {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: @item-flex-gap 0;
+
+            &__info {
+                display: flex;
+                align-items: center;
+
+                &-color {
+                    width: @space-x6;
+                    height: @space-x6;
+                    border-radius: @parameter-border-radius;
+                    margin-right: @items-min-space;
+                }
+
+                &-name {
+                    .font-13-extrabold;
+                }
+            }
+
+            &__count {
+                background: @pigeon-dark;
+                padding: @base-space @items-min-space;
+                border-radius: @parameter-border-radius;
+                .font-13-semibold;
+                .transition;
+
+                &._active {
+                    background: @space-fox;
+                }
+            }
+        }
+    }
+}

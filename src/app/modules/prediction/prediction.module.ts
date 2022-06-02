@@ -4,6 +4,7 @@ import { PredictionComponent } from './prediction.component';
 import { PredictionRoutingModule } from "./prediction-routing.module";
 import {NavigationModule} from "../navigation/navigation.module";
 import {PredictionDashboardModule} from "./prediction-dashboard/prediction-dashboard.module";
+import {TuiScrollbarModule} from "@taiga-ui/core";
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import {PredictionDashboardModule} from "./prediction-dashboard/prediction-dashb
         CommonModule,
         PredictionRoutingModule,
         NavigationModule,
-        PredictionDashboardModule
+        PredictionDashboardModule,
+        TuiScrollbarModule
     ]
 })
 export class PredictionModule { }

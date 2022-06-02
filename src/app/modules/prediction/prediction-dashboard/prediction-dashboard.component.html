@@ -1,10 +1,8 @@
-
-
 <div class="prediction-dashboard">
     <div class="prediction-dashboard__header">
 
         <h2 class="prediction-dashboard__header-title">
-            Prediction task estimate
+            Task overview
         </h2>
 
         <form [formGroup]="formGroup" class="prediction-dashboard__header-tools">
@@ -20,7 +18,7 @@
                     formControlName="preview"
                     [tuiTextfieldSize]="'m'"
                 >
-                    <p>Prediction type</p>
+                    <p>Dashboard type</p>
                     <tui-data-list-wrapper
                         *tuiDataList
                         [items]="PREDICTION_TYPES"
@@ -43,9 +41,8 @@
 
     <div class="prediction-dashboard__content">
         <task-table class="prediction-dashboard__content__table"></task-table>
-
-        <div class="prediction-dashboard__content__graphic">
-
-        </div>
+        <task-chart class="prediction-dashboard__content__graphic"
+                    [tasks]="tasks"
+        ></task-chart>
     </div>
 </div>
