@@ -14,6 +14,7 @@ import { ChatListResponse, ChatMessageResponse} from "../../models/chatList.mode
 import { TaskComment } from "../../models/comments.model";
 import { ConverterHelper } from "../../helpers/converter.helper";
 import { DataResponse } from "../../models/data.models";
+import {Model} from "../../models/model.models";
 
 @Injectable({
     providedIn: 'root'
@@ -146,14 +147,117 @@ export class RestApiService {
     }
 
     public loadTasks(): Observable<TaskResponse[]> {
-        return this.http.get(RestApiService.getUrl(Endpoints.GET_TASKS)).pipe(
-            map((response: TaskResponse[]) => response),
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_TASKS),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<TaskResponse[]>) => response.data),
             catchError((error: HttpErrorResponse) => {
                 AtomStateService.notificationState.setAtomByKey({
                     key: 'NOTIFICATION',
                     value: {
                         notificationType: TuiNotification.Error,
                         notificationTitle: 'Error load system tasks',
+                        notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
+                    }
+                })
+                return of(null);
+            }),
+        );
+    }
+
+    public loadTasksCount(): Observable<number> {
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_TASKS_COUNT),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<number>) => response.data),
+            catchError((error: HttpErrorResponse) => {
+                AtomStateService.notificationState.setAtomByKey({
+                    key: 'NOTIFICATION',
+                    value: {
+                        notificationType: TuiNotification.Error,
+                        notificationTitle: 'Error load tickets count',
+                        notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
+                    }
+                })
+                return of(null);
+            }),
+        );
+    }
+
+    public loadModels(): Observable<Model[]> {
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_MODELS),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<Model[]>) => response.data),
+            catchError((error: HttpErrorResponse) => {
+                AtomStateService.notificationState.setAtomByKey({
+                    key: 'NOTIFICATION',
+                    value: {
+                        notificationType: TuiNotification.Error,
+                        notificationTitle: 'Error load models',
+                        notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
+                    }
+                })
+                return of(null);
+            }),
+        );
+    }
+
+    public loadDefaultModel(): Observable<Model> {
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_DEFAULT_MODEL),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<Model>) => response.data),
+            catchError((error: HttpErrorResponse) => {
+                AtomStateService.notificationState.setAtomByKey({
+                    key: 'NOTIFICATION',
+                    value: {
+                        notificationType: TuiNotification.Error,
+                        notificationTitle: 'Error load default models',
+                        notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
+                    }
+                })
+                return of(null);
+            }),
+        );
+    }
+
+    public setDefaultModel(id: string): Observable<Model> {
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_DEFAULT_MODEL),
+            { headers: RestApiService.getAuthorizationHeaders(), params: {id}}
+        ).pipe(
+            map((response: DataResponse<Model>) => response.data),
+            catchError((error: HttpErrorResponse) => {
+                AtomStateService.notificationState.setAtomByKey({
+                    key: 'NOTIFICATION',
+                    value: {
+                        notificationType: TuiNotification.Error,
+                        notificationTitle: 'Error set default model',
+                        notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
+                    }
+                })
+                return of(null);
+            }),
+        );
+    }
+
+    public trainNewModel(modelType: string): Observable<void> {
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.TRAIN_NEW_MODEL),
+            { headers: RestApiService.getAuthorizationHeaders(), params: {modelType}}
+        ).pipe(
+            map((response: DataResponse<void>) => response.data),
+            catchError((error: HttpErrorResponse) => {
+                AtomStateService.notificationState.setAtomByKey({
+                    key: 'NOTIFICATION',
+                    value: {
+                        notificationType: TuiNotification.Error,
+                        notificationTitle: 'Error start train model',
                         notificationContent: error?.error?.message || ErrorHelper.errorMap.get(error.status)
                     }
                 })
@@ -251,7 +355,7 @@ export class RestApiService {
             key: 'NOTIFICATION',
             value: {
                 notificationType: TuiNotification.Info,
-                notificationTitle: `Creating ${newTask.title} task`
+                notificationTitle: `Creating ${newTask.name} task`
             }
         })
         loadingId && LoadingService.startLoadingById(loadingId);
@@ -304,7 +408,7 @@ export class RestApiService {
             key: 'NOTIFICATION',
             value: {
                 notificationType: TuiNotification.Info,
-                notificationTitle: `Updating ${newTask.title} task`
+                notificationTitle: `Updating ${newTask.name} task`
             }
         })
         loadingId && LoadingService.startLoadingById(loadingId);

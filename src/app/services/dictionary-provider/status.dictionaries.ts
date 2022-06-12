@@ -1,15 +1,26 @@
 import { Dictionary, Transition } from "./dictionaries.models";
 
+export const MODEL_TYPE_DICTIONARY: Dictionary[] = [
+    {
+        key: 'randomForest',
+        displayName: 'Random Forest'
+    },
+    {
+        key: 'linearRegression',
+        displayName: 'Linear Regression'
+    },
+]
+
 export const TYPE_DICTIONARY: Dictionary[] = [
     {
-        key: 'STORY',
+        key: '10001',
         displayName: 'Story',
         icon: {
             name: 'd-type-story',
         }
     },
     {
-        key: 'BUG',
+        key: '10004',
         displayName: 'Bug',
         icon: {
             name: 'd-type-bug',
@@ -63,25 +74,25 @@ export const PRIORITY_DICTIONARY: Dictionary[] = [
 
 export const STATUS_DICTIONARY: Dictionary[] = [
     {
-        key: 'OPEN',
+        key: '10000',
         displayName: 'Open',
         isDefault: true
     },
     {
-        key: 'IN_PROGRESS',
+        key: '10001',
         displayName: 'In progress'
     },
     {
-        key: 'TECH_REVIEW',
+        key: '10004',
         displayName: 'Technical review'
     },
     {
-        key: 'DONE',
-        displayName: 'Done'
+        key: '10003',
+        displayName: 'Hold'
     },
     {
-        key: 'DELETE',
-        displayName: 'Delete',
+        key: '10002',
+        displayName: 'Done',
         isDelete: true
     }
 ];

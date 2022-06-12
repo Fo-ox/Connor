@@ -1,6 +1,6 @@
 export type User = {
     id: string;
-    internalSystemId?: string;
+    externalSystemId?: string;
     userInfo: UserInfo;
 }
 
@@ -12,6 +12,7 @@ export type UserInfo = {
 
 export interface UserResponse {
     id?: string;
+    externalSystemId?: string;
     role?: string;
     firstName: string;
     lastName?: string;

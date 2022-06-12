@@ -60,16 +60,16 @@ export class TemplateInstances implements AfterViewChecked {
 
     public getEstimateColor(initialEstimateId: string): string {
         switch (initialEstimateId) {
-            case 'EASY': {
+            case 'Easy': {
                 return '74, 201, 155';
             }
-            case 'MEDIUM': {
+            case 'Medium': {
                 return '255, 199, 0';
             }
-            case 'HARD': {
+            case 'Hard': {
                 return '244, 87, 37';
             }
         }
-        return '35, 36, 43';
+        return '255, 255, 255';
     }
 }

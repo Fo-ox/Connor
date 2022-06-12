@@ -11,6 +11,6 @@ export class DisplayEstimatePipe implements PipeTransform {
         }
         const days = (value - value % HOURS_IN_DAY) / HOURS_IN_DAY;
         const hours = value - days * HOURS_IN_DAY;
-        return value ? `${days > 1 ? days + 'd' : ''} ${hours ? hours + 'h' : ''}` : `0h`
+        return value ? `${days >= 1 ? days + 'd' : ''} ${hours ? hours + 'h' : ''}` : `0h`
     }
 }

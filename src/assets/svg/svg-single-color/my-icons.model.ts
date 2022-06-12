@@ -16,6 +16,7 @@ export type SingleColorIcon =
   | 'filter'
   | 'logout'
   | 'more'
+  | 'refresh'
   | 'search'
   | 'setting'
   | 'user';

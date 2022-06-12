@@ -34,21 +34,21 @@ export class NavigationComponent implements OnInit {
         );
     }
 
-    onDashboardsNavigate() {
+    public onDashboardsNavigate(): void {
         this.routingService.navigate(RouteLinks.DASHBOARDS);
     }
 
-    onLogout() {
+    public onLogout(): void {
         RestApiService.clearSessionUser();
         this.routingService.navigate(RouteLinks.LOGIN);
     }
 
-    openDialog(content:TemplateRef<TuiDialogContext<void>> ){
+    public openDialog(content:TemplateRef<TuiDialogContext<void>>): void {
         this.dialogSubscriber$ = this.dialogService.open(content, {size: 's'})
             .pipe(untilDestroyed(this)).subscribe();
     }
 
-    closeDialog(): void {
+    public closeDialog(): void {
         this.dialogSubscriber$.unsubscribe();
     }
 }

@@ -3,48 +3,89 @@
 } as async">
 
 <div class="task-chart" *ngIf="async.chartData?.estimates?.length">
-    <tui-ring-chart
-        class="task-chart__ring"
-        size="xl"
-        [value]="async.chartData?.estimates"
-        [content]="content"
-        [(activeItemIndex)]="activeItemIndex"
-    ></tui-ring-chart>
+    <div class="task-chart__ring">
+        <tui-ring-chart
+            class="task-chart__ring-chart"
+            size="xl"
+            [value]="async.chartData?.estimates"
+            [content]="content"
+            [(activeItemIndex)]="activeItemIndex"
+        ></tui-ring-chart>
+
+        <div class="task-chart__ring-types">
+            <ng-container *ngFor="let type of taskTypesAssignment">
+                <div class="task-chart__ring-types__type">{{ type.type }}</div>
+                <div class="task-chart__ring-types__count">{{ type.count }}</div>
+            </ng-container>
+        </div>
+    </div>
 
     <div class="task-chart__legend">
-        <div class="task-chart__legend__total">
-            <div class="task-chart__legend__total-header">
-                <p> Total estimate </p>
-                <span> by selected filter </span>
+        <div>
+            <div class="task-chart__legend__total">
+                <div class="task-chart__legend__total-header">
+                    <p> Total estimate </p>
+                    <span> filtered by not completed tasks </span>
+                </div>
+                <div class="task-chart__legend__total-counter">
+                    {{ async.chartData?.totalEstimates | displayEstimate }}
+                </div>
             </div>
-            <div class="task-chart__legend__total-counter">
-                {{ async.chartData?.totalEstimates | displayEstimate }}
+
+            <div class="task-chart__legend__detail"
+                 *ngFor="let label of async.chartData?.labels; let index = index"
+            >
+                <div class="task-chart__legend__detail__info">
+                    <div class="task-chart__legend__detail__info-color"
+                         [style.background-color]="getColor(index)"
+                    ></div>
+                    <span class="task-chart__legend__detail__info-name">
+                        {{ label }}
+                    </span>
+                </div>
+
+                <div class="task-chart__legend__detail__count"
+                     [class._active]="activeItemIndex === index"
+                >
+                    {{ async.chartData?.estimates?.[index] | displayEstimate }}
+                </div>
             </div>
         </div>
 
-        <div class="task-chart__legend__detail"
-             *ngFor="let label of async.chartData?.labels; let index = index"
-        >
-            <div class="task-chart__legend__detail__info">
-                <div class="task-chart__legend__detail__info-color"
-                      [style.background-color]="getColor(index)"
-                ></div>
-                <span class="task-chart__legend__detail__info-name">
-                    {{ label }}
+        <ng-container *ngIf="{
+                    implemented: (async.chartData?.resolvedEstimates / (async.chartData?.resolvedEstimates + async.chartData?.totalEstimates) * 100).toFixed(),
+                    remaining: (async.chartData?.totalEstimates / (async.chartData?.resolvedEstimates + async.chartData?.totalEstimates) * 100).toFixed()
+                } as percent">
+
+        <div class="task-chart__legend__resolved">
+            <div class="task-chart__legend__resolved-percent">
+                <span class="task-chart__legend__resolved-percent__complete"
+                      [style.width]="percent.implemented + '%'"
+                >
+                    {{ async.chartData?.resolvedEstimates | displayEstimate }}
+                </span>
+                <span class="task-chart__legend__resolved-percent__progress"
+                      [style.width]="percent.remaining + '%'"
+                >
+                    {{ async.chartData?.totalEstimates | displayEstimate }}
                 </span>
             </div>
-
-            <div class="task-chart__legend__detail__count"
-                 [class._active]="activeItemIndex === index"
-            >
-                {{ async.chartData?.estimates?.[index] | displayEstimate }}
+            <div class="task-chart__legend__resolved-legend">
+                    <span class="task-chart__legend__resolved-legend__label">
+                        implemented {{ percent.implemented }}%
+                    </span>
+                    <span class="task-chart__legend__resolved-legend__label">
+                        remaining {{ percent.remaining }}%
+                    </span>
             </div>
         </div>
+
+        </ng-container>
     </div>
 </div>
 
 <ng-template #content>
-    <div class="task-chart__ring__content"> Estimate chart </div>
+    <div class="task-chart__ring-chart__content"> Estimate chart </div>
 </ng-template>
 
 </ng-container>

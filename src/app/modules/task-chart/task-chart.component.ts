@@ -7,6 +7,8 @@ import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {Task} from "../../models/task.models";
 import {filter, map, tap} from "rxjs/operators";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {DictionariesService} from "../../services/dictionary-provider/dictionaries.service";
+import {Dictionary} from "../../services/dictionary-provider/dictionaries.models";
 
 @UntilDestroy()
 @Component({
@@ -17,12 +19,28 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 })
 export class TaskChartComponent implements OnInit, OnChanges {
     @Input() set tasks(tasks: Task[]) {
+        if (tasks) {
+            this.taskTypesAssignment = []
+            const groupedByType = CommonHelper.objectGroupByParameter<Task>(
+                tasks,
+                'type',
+                1,
+            );
+            DictionariesService.arrayDictionaries.type.forEach((type: Dictionary) => {
+                groupedByType[type.key] && this.taskTypesAssignment.push({
+                    type: type.displayName, count: groupedByType[type.key]?.length
+                })
+            })
+        }
         this.taskSubject$.next(tasks);
     };
 
+    public taskTypesAssignment: {type: string, count: number}[] = [];
+    public dictionaries = DictionariesService.arrayDictionaries;
+
     public users$: Observable<User[]> = AtomStateService.systemUsersState.getAtomValueByKey('SYSTEM_USERS')
 
-    public chartData$: Observable<{totalEstimates: number, estimates: number[], labels: string[]}>;
+    public chartData$: Observable<{totalEstimates: number, estimates: number[], labels: string[], resolvedEstimates?: number}>;
     public activeItemIndex: number = null;
 
     public readonly NOT_ASSIGNED = 'Not Assigned';
@@ -50,6 +68,7 @@ export class TaskChartComponent implements OnInit, OnChanges {
                     1,
                     this.NOT_ASSIGNED,
                 );
+
                 const estimates = [];
                 const labels = [];
 
@@ -66,8 +85,14 @@ export class TaskChartComponent implements OnInit, OnChanges {
                 })
 
                 const totalEstimates = estimates.reduce((prev, next) => prev + next)
+                let resolvedEstimates: number = 0;
+                tasks.forEach((task: Task) => {
+                    if (typeof task.resolvedEstimate === 'number' && !Number.isNaN(task.resolvedEstimate) && task.completed) {
+                        resolvedEstimates += task.resolvedEstimate
+                    }
+                })
 
-                return { totalEstimates, estimates, labels }
+                return { totalEstimates, estimates, labels, resolvedEstimates }
             }),
         );
     }
@@ -81,12 +106,18 @@ export class TaskChartComponent implements OnInit, OnChanges {
     }
 
     private static getEstimate(groupedByAssignee: Record<string, Task[]>, assigneeId: string): number {
-        return groupedByAssignee[assigneeId]
-            .reduce(function (acc: number, task: Task) { return acc + +task.predictEstimate || 0}, 0);
+        let total: number = 0;
+        groupedByAssignee[assigneeId]
+            .forEach((task: Task) => {
+                if (!task.completed) {
+                    total = total + (+task.predictEstimate || 0)
+                }
+            });
+        return total;
     }
 
     private static getLabel(users: User[], assigneeId: string): string {
-        const assigneeUser: User = users.find((user: User) => user.id === assigneeId);
+        const assigneeUser: User = users.find((user: User) => user.id === assigneeId || user.externalSystemId === assigneeId);
         return assigneeUser
             ? `${assigneeUser?.userInfo?.firstName} ${assigneeUser?.userInfo?.lastName}`
             : 'unknown user';

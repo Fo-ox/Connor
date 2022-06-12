@@ -61,14 +61,14 @@ export class ConverterHelper {
             return null;
         }
         return {
-            dashboardId: form.controls.dashboardId?.value,
-            title: form.controls.name?.value,
+            projectId: form.controls.dashboardId?.value,
+            name: form.controls.name?.value,
             description: form.controls.description?.value,
-            assignedBy: form.controls.assignee?.value?.id,
-            createdBy: form.controls.reporter?.value?.id,
-            type: form.controls.type?.value?.key,
-            priority: form.controls.priority?.value?.key,
-            status: form.controls.status?.value,
+            assigneeId: form.controls.assignee?.value?.id,
+            reporterId: form.controls.reporter?.value?.id,
+            typeId: form.controls.type?.value?.key,
+            priorityId: form.controls.priority?.value?.key,
+            statusId: form.controls.status?.value,
         }
     }
 
@@ -77,15 +77,15 @@ export class ConverterHelper {
             return null;
         }
         return {
-            taskId: task.id,
-            dashboardId: task.dashboardId,
-            title: task.title,
+            id: task.id,
+            projectId: task.dashboardId,
+            name: task.title,
             description: task.description,
-            assignedBy: task.assignee,
-            createdBy: task.reporter,
-            type: task.type,
-            priority: task.priority,
-            status: task.status,
+            assigneeId: task.assignee,
+            reporterId: task.reporter,
+            typeId: task.type,
+            priorityId: task.priority,
+            statusId: task.status,
             // creationDate: task.creationDate,
         }
     }
@@ -110,18 +110,25 @@ export class ConverterHelper {
             return null;
         }
         return {
-            title: task.title,
-            id: task.taskId,
-            code: task.dashboardSeq,
-            type: task.type,
-            priority: task.priority,
-            status: task.status,
-            assignee: task.assignedBy,
-            reporter: task.createdBy,
-            creationDate: new Date(task.creationDate)?.toISOString(),
-            dashboardId: task.dashboardId,
+            title: task.name,
+            id: task.id,
+            externalSystemId: task.externalSystemId,
+            type: task.typeId,
+            priority: task.priorityId,
+            status: task.statusId,
+            assignee: task.assigneeId,
+            reporter: task.reporterId,
+            creationDate: new Date(task.createDate)?.toISOString(),
+            dashboardId: task.projectId,
             description: task.description,
-            updateDate: new Date(task.modificationDate)?.toISOString(),
+            updateDate: new Date(task.closeDate)?.toISOString(),
+            completed: task.completed,
+            components: task.tags.split(','),
+            initialEstimateId: task.initialEstimate,
+            resolvedEstimate: task.resolvedEstimate,
+            predictEstimate: task.predictEstimate,
+            predictorVersion: task.predictorVersion,
+            predictorType: task.predictorType
         }
     }
 
@@ -131,6 +138,7 @@ export class ConverterHelper {
         }
         return {
             id: user.id,
+            externalSystemId: user.externalSystemId,
             userInfo: {
                 firstName: user.firstName,
                 lastName: user.lastName,

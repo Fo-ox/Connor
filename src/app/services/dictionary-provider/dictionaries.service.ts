@@ -1,5 +1,6 @@
 import {DictionariesBeArray, DictionariesBeObject, Dictionary, Icon, Transition} from "./dictionaries.models";
 import {
+    MODEL_TYPE_DICTIONARY,
     PRIORITY_DICTIONARY,
     STATUS_DICTIONARY,
     STATUS_TRANSITION_DICTIONARY,
@@ -15,7 +16,8 @@ export class DictionariesService {
         type: TYPE_DICTIONARY,
         priority: PRIORITY_DICTIONARY,
         status: STATUS_DICTIONARY,
-        transition: STATUS_TRANSITION_DICTIONARY
+        transition: STATUS_TRANSITION_DICTIONARY,
+        modelType: MODEL_TYPE_DICTIONARY,
     };
     public static objectDictionaries: DictionariesBeObject =
         DictionariesService.convertDictionaryArrayToObject(DictionariesService.arrayDictionaries);

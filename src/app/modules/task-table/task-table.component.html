@@ -4,7 +4,7 @@
     users: users$ | async
 } as async">
 
-<div class="task-table">
+<div class="task-table" *ngIf="tasks?.length">
     <tui-scrollbar class="_scroll-container">
         <div class="_scroll-content">
             <table
@@ -21,14 +21,15 @@
                 </thead>
 
                 <tbody tuiTbody [data]="tasks">
-                    <tr *tuiRow="let task of tasks" tuiTr>
+                    <tr *tuiRow="let task of tasks.reverse()" tuiTr>
                         <td *tuiCell="'task'" tuiTd class="table-column _task">{{ task.title }}</td>
                         <td *tuiCell="'estimate'" tuiTd class="table-column _estimate">
                             <ng-container *ngTemplateOutlet="async.estimateTemplate; context: {data: task}">
                             </ng-container>
                         </td>
                         <td *tuiCell="'assignee'" tuiTd class="table-column _assignee">
-                            <ng-container *ngIf="async.users | arrayProto:'find': 'id': task.assignee as user">
+                            <ng-container *ngIf="task.assignee && ((async.users | arrayProto:'find': 'id': task.assignee)
+                                || (async.users | arrayProto: 'find': 'externalSystemId': task.assignee)) as user">
                                 <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
                             </ng-container>
                         </td>

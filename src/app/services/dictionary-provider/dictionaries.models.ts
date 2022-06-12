@@ -23,6 +23,7 @@ export type DictionariesBeArray = {
     priority?: Dictionary[];
     type?: Dictionary[];
     transition?: Transition[];
+    modelType?: Dictionary[];
 }
 
 export type DictionariesBeObject = {
@@ -30,4 +31,5 @@ export type DictionariesBeObject = {
     priority?: Record<string, Dictionary>
     type?: Record<string, Dictionary>
     transition?: Record<string, Transition>
+    modelType?: Record<string, Dictionary>;
 }

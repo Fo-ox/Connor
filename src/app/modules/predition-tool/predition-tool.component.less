@@ -1,0 +1,64 @@
+@import "../../../assets/styles/vars";
+@import "../../../assets/styles/color";
+@import "../../../assets/styles/fonts";
+
+.prediction-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        display: block;
+    }
+
+    &__content {
+        background: rgb(22, 22, 26);
+        min-width: 300px;
+
+        &__default {
+            padding: @space-x10;
+            border-bottom: 1px solid #808080;
+
+            &-header {
+                .font-15-extrabold;
+                margin-bottom: @items-min-space;
+                margin-left: @items-min-space;
+            }
+        }
+
+        &__train {
+            padding: @space-x10;
+
+            &-header {
+                .font-15-extrabold;
+                margin-bottom: @items-min-space;
+                margin-left: @items-min-space;
+            }
+
+            &-tasks {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                margin-top: @items-min-space;
+                margin-bottom: @items-max-space;
+
+                &__label {
+                    margin-left: @items-min-space;
+                    .font-13-regular;
+                }
+
+                &__value {
+                    .font-15-semibold;
+                    margin-right: @items-min-space;
+                }
+            }
+
+            &-button {
+                display: block;
+                margin: 0 auto;
+                .button-primary;
+                .font-13-bold;
+            }
+        }
+    }
+}

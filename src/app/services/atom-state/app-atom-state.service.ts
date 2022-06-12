@@ -1,9 +1,9 @@
 import { AbstractAtomService } from "./atom-state.absctract";
 import {
     ChatListAtomState, ChatMsgAtomState, CommentsAtomState,
-    DashboardsAtomState, LoadingAtomState, NotificationAtomState,
+    DashboardsAtomState, DefaultModelAtomState, LoadingAtomState, ModelsAtomState, NotificationAtomState,
     QueryParamsEntitiesAtomState, SystemUsersAtomState,
-    TasksAtomState, TemplatesAtomState,
+    TasksAtomState, TasksCountAtomState, TemplatesAtomState,
     ThisUserAtomState, TokenAtomState, TriggerAtomState
 } from "./app-atom-state.models";
 
@@ -11,6 +11,10 @@ export class AtomStateService {
     public static thisUserState = new AbstractAtomService<ThisUserAtomState>('This user state');
     public static systemUsersState = new AbstractAtomService<SystemUsersAtomState>('System users state');
     public static tasksState = new AbstractAtomService<TasksAtomState>('Tasks state');
+    public static tasksCountState = new AbstractAtomService<TasksCountAtomState>('Tasks count state')
+    public static modelsState = new AbstractAtomService<ModelsAtomState>('Models state');
+    public static defaultModelState = new AbstractAtomService<DefaultModelAtomState>('Default model state')
+
     public static dashboardState = new AbstractAtomService<DashboardsAtomState>('Dashboard state');
     public static chatListState = new AbstractAtomService<ChatListAtomState>('ChatList state');
     public static chatMsgState = new AbstractAtomService<ChatMsgAtomState>('ChatMsg state');
