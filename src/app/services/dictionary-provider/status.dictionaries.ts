@@ -13,14 +13,14 @@ export const MODEL_TYPE_DICTIONARY: Dictionary[] = [
 
 export const TYPE_DICTIONARY: Dictionary[] = [
     {
-        key: '10004',
+        key: '10001',
         displayName: 'Story',
         icon: {
             name: 'd-type-story',
         }
     },
     {
-        key: '10001',
+        key: '10004',
         displayName: 'Bug',
         icon: {
             name: 'd-type-bug',

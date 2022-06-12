@@ -7,6 +7,8 @@ import {BehaviorSubject, combineLatest, Observable} from "rxjs";
 import {Task} from "../../models/task.models";
 import {filter, map, tap} from "rxjs/operators";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {DictionariesService} from "../../services/dictionary-provider/dictionaries.service";
+import {Dictionary} from "../../services/dictionary-provider/dictionaries.models";
 
 @UntilDestroy()
 @Component({
@@ -17,8 +19,24 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 })
 export class TaskChartComponent implements OnInit, OnChanges {
     @Input() set tasks(tasks: Task[]) {
+        if (tasks) {
+            this.taskTypesAssignment = []
+            const groupedByType = CommonHelper.objectGroupByParameter<Task>(
+                tasks,
+                'type',
+                1,
+            );
+            DictionariesService.arrayDictionaries.type.forEach((type: Dictionary) => {
+                groupedByType[type.key] && this.taskTypesAssignment.push({
+                    type: type.displayName, count: groupedByType[type.key]?.length
+                })
+            })
+        }
         this.taskSubject$.next(tasks);
     };
+
+    public taskTypesAssignment: {type: string, count: number}[] = [];
+    public dictionaries = DictionariesService.arrayDictionaries;
 
     public users$: Observable<User[]> = AtomStateService.systemUsersState.getAtomValueByKey('SYSTEM_USERS')
 

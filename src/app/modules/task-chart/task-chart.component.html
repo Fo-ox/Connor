@@ -11,11 +11,12 @@
             [content]="content"
             [(activeItemIndex)]="activeItemIndex"
         ></tui-ring-chart>
+
         <div class="task-chart__ring-types">
-            <div class="task-chart__ring-types__type">Bug</div>
-            <div class="task-chart__ring-types__count">5</div>
-            <div class="task-chart__ring-types__type">Story</div>
-            <div class="task-chart__ring-types__count">3</div>
+            <ng-container *ngFor="let type of taskTypesAssignment">
+                <div class="task-chart__ring-types__type">{{ type.type }}</div>
+                <div class="task-chart__ring-types__count">{{ type.count }}</div>
+            </ng-container>
         </div>
     </div>
 
@@ -24,7 +25,7 @@
             <div class="task-chart__legend__total">
                 <div class="task-chart__legend__total-header">
                     <p> Total estimate </p>
-                    <span> by selected filter </span>
+                    <span> filtered by not completed tasks </span>
                 </div>
                 <div class="task-chart__legend__total-counter">
                     {{ async.chartData?.totalEstimates | displayEstimate }}
