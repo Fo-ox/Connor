@@ -6,10 +6,15 @@ import { TemplateRef } from "@angular/core";
 import { ChatList, ChatMessage } from "../../models/chatList.models";
 import { Notification } from "../../models/ui.models";
 import {TaskComment} from "../../models/comments.model";
+import {Model} from "../../models/model.models";
 
 export type ThisUserAtomState = AtomThisUser;
 export type SystemUsersAtomState = AtomSystemUsers;
 export type TasksAtomState = AtomTasks;
+export type TasksCountAtomState = AtomTasksCount;
+export type ModelsAtomState = AtomModels;
+export type DefaultModelAtomState = AtomDefaultModel;
+
 export type DashboardsAtomState = AtomDashboards;
 export type ChatListAtomState = AtomChatList;
 export type LoadingAtomState = AtomLoading;
@@ -31,6 +36,10 @@ export type AtomKeys =
     'THIS_USER'
     | 'SYSTEM_USERS'
     | 'TASKS'
+    | 'TASKS_COUNT'
+    | 'MODELS'
+    | 'DEFAULT_MODEL'
+
     | 'DASHBOARDS'
     | 'CHAT_LIST'
     | 'LOADING'
@@ -56,6 +65,10 @@ export type AtomKeys =
 export type AtomThisUser = Atom<'THIS_USER', User>;
 export type AtomSystemUsers = Atom<'SYSTEM_USERS', User[]>;
 export type AtomTasks = Atom<'TASKS', Task[]>;
+export type AtomTasksCount = Atom<'TASKS_COUNT', number>;
+export type AtomModels = Atom<'MODELS', Model[]>
+export type AtomDefaultModel = Atom<'DEFAULT_MODEL', Model>
+
 export type AtomDashboards = Atom<'DASHBOARDS', Dashboard[]>;
 export type AtomChatList = Atom<'CHAT_LIST', ChatList[]>;
 export type AtomLoading = Atom<'LOADING', string[]>;

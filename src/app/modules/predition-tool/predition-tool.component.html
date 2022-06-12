@@ -1,10 +1,14 @@
 <ng-container *ngIf="{
+    taskDataSize: taskDataSize$ | async,
+    defaultModel: defaultModel$ | async,
+    models: models$ | async
 } as async">
 
     <tui-hosted-dropdown
         class="prediction-tool"
         [content]="searchContent"
         [open]="dropdownVisible"
+        (openChange)="_onOpenDropdown($event)"
     >
         <button class="prediction-tool__icon">
             <svg-icon [key]="'dashboard'" [size]="'sm'"></svg-icon>
@@ -21,11 +25,12 @@
                     [tuiActiveZoneParent]="activeZone"
                     [tuiTextfieldSize]="'m'"
                     [(ngModel)]="defaultModel"
+                    (ngModelChange)="_onSelectNewDefaultModel()"
                 >
                     <p>Selected model*</p>
                     <tui-data-list-wrapper
                         *tuiDataList
-                        [items]="['1','2','3']"
+                        [items]="async.models"
                     ></tui-data-list-wrapper>
                 </tui-select>
             </div>
@@ -38,12 +43,12 @@
                 <tui-select
                     [tuiActiveZoneParent]="activeZone"
                     [tuiTextfieldSize]="'m'"
-                    [(ngModel)]="taskType"
+                    [(ngModel)]="trainSelectedType"
                 >
                     <p>Model type*</p>
                     <tui-data-list-wrapper
                         *tuiDataList
-                        [items]="['1','2','3']"
+                        [items]="modelTypes"
                     ></tui-data-list-wrapper>
                 </tui-select>
 
@@ -52,11 +57,14 @@
                         Current task data size
                     </div>
                     <div class="prediction-tool__content__train-tasks__value">
-                        248
+                        {{ async.taskDataSize }}
                     </div>
                 </div>
 
-                <button class="prediction-tool__content__train-button">Train and publish</button>
+                <button class="prediction-tool__content__train-button"
+                        (tap)="startTrain()"
+                >Train and publish
+                </button>
             </div>
         </div>
     </ng-template>

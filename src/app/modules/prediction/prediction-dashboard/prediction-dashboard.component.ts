@@ -15,7 +15,7 @@ import { AtomStateService } from "../../../services/atom-state/app-atom-state.se
 export class PredictionDashboardComponent implements OnInit {
     public formGroup: FormGroup;
 
-    public tasks$ = AtomStateService.tasksState.getAtomValueByKey('TASKS');
+    public tasks$ = AtomStateService.tasksState.getAtomValueByKey('TASKS')
 
     public readonly PREDICTION_TYPES = PREDICTION_TYPES;
 
