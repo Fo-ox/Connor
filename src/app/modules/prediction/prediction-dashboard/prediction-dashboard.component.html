@@ -39,6 +39,15 @@
                     Choose dates
                 </tui-input-date-range>
             </div>
+
+            <div class="prediction-dashboard__header-tools__filter"
+                 (tap)="refreshTickets()"
+            >
+                <svg-icon class="prediction-dashboard__header-tools__filter-icon"
+                          [key]="'refresh'"
+                          [size]="'sm'"
+                ></svg-icon>
+            </div>
         </form>
 
     </div>

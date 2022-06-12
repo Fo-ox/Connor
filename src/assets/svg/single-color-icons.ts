@@ -21,6 +21,7 @@ export * from './svg-single-color/cpm-estimate.icon';
 export * from './svg-single-color/cpm-filter.icon';
 export * from './svg-single-color/cpm-logout.icon';
 export * from './svg-single-color/cpm-more.icon';
+export * from './svg-single-color/cpm-refresh.icon';
 export * from './svg-single-color/cpm-search.icon';
 export * from './svg-single-color/cpm-setting.icon';
 export * from './svg-single-color/cpm-user.icon';
