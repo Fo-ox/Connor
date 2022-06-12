@@ -51,16 +51,35 @@
             </div>
         </div>
 
+        <ng-container *ngIf="{
+                    implemented: (async.chartData?.resolvedEstimates / (async.chartData?.resolvedEstimates + async.chartData?.totalEstimates) * 100).toFixed(),
+                    remaining: (async.chartData?.totalEstimates / (async.chartData?.resolvedEstimates + async.chartData?.totalEstimates) * 100).toFixed()
+                } as percent">
+
         <div class="task-chart__legend__resolved">
             <div class="task-chart__legend__resolved-percent">
-                <span class="task-chart__legend__resolved-percent__complete">3d 1h</span>
-                <span class="task-chart__legend__resolved-percent__progress">50d 6h</span>
+                <span class="task-chart__legend__resolved-percent__complete"
+                      [style.width]="percent.implemented + '%'"
+                >
+                    {{ async.chartData?.resolvedEstimates | displayEstimate }}
+                </span>
+                <span class="task-chart__legend__resolved-percent__progress"
+                      [style.width]="percent.remaining + '%'"
+                >
+                    {{ async.chartData?.totalEstimates | displayEstimate }}
+                </span>
             </div>
             <div class="task-chart__legend__resolved-legend">
-                <span class="task-chart__legend__resolved-legend__label">implemented 6%</span>
-                <span class="task-chart__legend__resolved-legend__label">remaining 94%</span>
+                    <span class="task-chart__legend__resolved-legend__label">
+                        implemented {{ percent.implemented }}%
+                    </span>
+                    <span class="task-chart__legend__resolved-legend__label">
+                        remaining {{ percent.remaining }}%
+                    </span>
             </div>
         </div>
+
+        </ng-container>
     </div>
 </div>
 

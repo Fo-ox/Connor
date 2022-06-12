@@ -22,7 +22,7 @@ export class TaskChartComponent implements OnInit, OnChanges {
 
     public users$: Observable<User[]> = AtomStateService.systemUsersState.getAtomValueByKey('SYSTEM_USERS')
 
-    public chartData$: Observable<{totalEstimates: number, estimates: number[], labels: string[]}>;
+    public chartData$: Observable<{totalEstimates: number, estimates: number[], labels: string[], resolvedEstimates?: number}>;
     public activeItemIndex: number = null;
 
     public readonly NOT_ASSIGNED = 'Not Assigned';
@@ -67,8 +67,14 @@ export class TaskChartComponent implements OnInit, OnChanges {
                 })
 
                 const totalEstimates = estimates.reduce((prev, next) => prev + next)
+                let resolvedEstimates: number = 0;
+                tasks.forEach((task: Task) => {
+                    if (typeof task.resolvedEstimate === 'number' && !Number.isNaN(task.resolvedEstimate) && task.completed) {
+                        resolvedEstimates += task.resolvedEstimate
+                    }
+                })
 
-                return { totalEstimates, estimates, labels }
+                return { totalEstimates, estimates, labels, resolvedEstimates }
             }),
         );
     }
@@ -84,7 +90,11 @@ export class TaskChartComponent implements OnInit, OnChanges {
     private static getEstimate(groupedByAssignee: Record<string, Task[]>, assigneeId: string): number {
         let total: number = 0;
         groupedByAssignee[assigneeId]
-            .forEach((task: Task) => total = total + (+task.predictEstimate || 0));
+            .forEach((task: Task) => {
+                if (!task.completed) {
+                    total = total + (+task.predictEstimate || 0)
+                }
+            });
         return total;
     }
 
