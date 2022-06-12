@@ -146,8 +146,11 @@ export class RestApiService {
     }
 
     public loadTasks(): Observable<TaskResponse[]> {
-        return this.http.get(RestApiService.getUrl(Endpoints.GET_TASKS)).pipe(
-            map((response: TaskResponse[]) => response),
+        return this.http.get(
+            RestApiService.getUrl(Endpoints.GET_TASKS),
+            { headers: RestApiService.getAuthorizationHeaders() }
+        ).pipe(
+            map((response: DataResponse<TaskResponse[]>) => response.data),
             catchError((error: HttpErrorResponse) => {
                 AtomStateService.notificationState.setAtomByKey({
                     key: 'NOTIFICATION',
@@ -251,7 +254,7 @@ export class RestApiService {
             key: 'NOTIFICATION',
             value: {
                 notificationType: TuiNotification.Info,
-                notificationTitle: `Creating ${newTask.title} task`
+                notificationTitle: `Creating ${newTask.name} task`
             }
         })
         loadingId && LoadingService.startLoadingById(loadingId);
@@ -304,7 +307,7 @@ export class RestApiService {
             key: 'NOTIFICATION',
             value: {
                 notificationType: TuiNotification.Info,
-                notificationTitle: `Updating ${newTask.title} task`
+                notificationTitle: `Updating ${newTask.name} task`
             }
         })
         loadingId && LoadingService.startLoadingById(loadingId);

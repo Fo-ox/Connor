@@ -2,14 +2,14 @@ import { Dictionary, Transition } from "./dictionaries.models";
 
 export const TYPE_DICTIONARY: Dictionary[] = [
     {
-        key: 'STORY',
+        key: '10004',
         displayName: 'Story',
         icon: {
             name: 'd-type-story',
         }
     },
     {
-        key: 'BUG',
+        key: '10001',
         displayName: 'Bug',
         icon: {
             name: 'd-type-bug',
@@ -63,12 +63,12 @@ export const PRIORITY_DICTIONARY: Dictionary[] = [
 
 export const STATUS_DICTIONARY: Dictionary[] = [
     {
-        key: 'OPEN',
+        key: '10001',
         displayName: 'Open',
         isDefault: true
     },
     {
-        key: 'IN_PROGRESS',
+        key: '10002',
         displayName: 'In progress'
     },
     {

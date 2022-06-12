@@ -1,5 +1,6 @@
 export type Task = {
     id: string;
+    externalSystemId?: string;
     code?: string;
     dashboardId: string;
     status: string;
@@ -9,6 +10,7 @@ export type Task = {
     priority?: string;
     components?: string[];
     tags?: string[];
+    completed?: boolean;
 
     reporter: string;
     assignee?: string;
@@ -20,19 +22,28 @@ export type Task = {
     initialEstimateId?: string;
     resolvedEstimate?: number;
     predictEstimate?: number;
+    predictorVersion?: string,
+    predictorType?: string,
 }
 
 export type TaskResponse = {
-    assignedBy?: string;
-    createdBy: string;
-    creationDate?: string;
-    dashboardId: string;
-    description?: string;
-    modificationDate?: string;
-    priority?: string;
-    status: string;
-    taskId?: string;
-    dashboardSeq?: string;
-    title?: string;
-    type: string;
+    id?: string,
+    externalSystemId?: string,
+    name?: string,
+    description?: string,
+    projectId?: string,
+    statusId?: string,
+    completed?: boolean,
+    typeId?: string,
+    priorityId?: string,
+    tags?: string,
+    reporterId?: string,
+    assigneeId?: string,
+    createDate?: string,
+    closeDate?: string,
+    initialEstimate?: string,
+    resolvedEstimate?: number,
+    predictEstimate?: number,
+    predictorVersion?: string,
+    predictorType?: string,
 }

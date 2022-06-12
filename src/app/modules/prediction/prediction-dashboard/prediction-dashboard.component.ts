@@ -4,7 +4,7 @@ import { PREDICTION_TYPES } from "../../../constants/UI.constants";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { distinctUntilChanged, tap } from "rxjs/operators";
 import isEqual from "lodash.isequal";
-import {TASKS} from "../../../mockups/task.mockups";
+import { AtomStateService } from "../../../services/atom-state/app-atom-state.service";
 
 @UntilDestroy()
 @Component({
@@ -15,7 +15,7 @@ import {TASKS} from "../../../mockups/task.mockups";
 export class PredictionDashboardComponent implements OnInit {
     public formGroup: FormGroup;
 
-    public tasks = TASKS;
+    public tasks$ = AtomStateService.tasksState.getAtomValueByKey('TASKS');
 
     public readonly PREDICTION_TYPES = PREDICTION_TYPES;
 

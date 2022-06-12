@@ -1,3 +1,7 @@
+<ng-container *ngIf="{
+    tasks: tasks$ | async
+} as async">
+
 <div class="prediction-dashboard">
     <div class="prediction-dashboard__header">
 
@@ -40,9 +44,13 @@
     </div>
 
     <div class="prediction-dashboard__content">
-        <task-table class="prediction-dashboard__content__table"></task-table>
+        <task-table class="prediction-dashboard__content__table"
+                    [tasks]="async.tasks"
+        ></task-table>
         <task-chart class="prediction-dashboard__content__graphic"
-                    [tasks]="tasks"
+                    [tasks]="async.tasks"
         ></task-chart>
     </div>
 </div>
+
+</ng-container>

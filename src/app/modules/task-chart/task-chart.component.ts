@@ -50,6 +50,7 @@ export class TaskChartComponent implements OnInit, OnChanges {
                     1,
                     this.NOT_ASSIGNED,
                 );
+
                 const estimates = [];
                 const labels = [];
 
@@ -81,12 +82,14 @@ export class TaskChartComponent implements OnInit, OnChanges {
     }
 
     private static getEstimate(groupedByAssignee: Record<string, Task[]>, assigneeId: string): number {
-        return groupedByAssignee[assigneeId]
-            .reduce(function (acc: number, task: Task) { return acc + +task.predictEstimate || 0}, 0);
+        let total: number = 0;
+        groupedByAssignee[assigneeId]
+            .forEach((task: Task) => total = total + (+task.predictEstimate || 0));
+        return total;
     }
 
     private static getLabel(users: User[], assigneeId: string): string {
-        const assigneeUser: User = users.find((user: User) => user.id === assigneeId);
+        const assigneeUser: User = users.find((user: User) => user.id === assigneeId || user.externalSystemId === assigneeId);
         return assigneeUser
             ? `${assigneeUser?.userInfo?.firstName} ${assigneeUser?.userInfo?.lastName}`
             : 'unknown user';

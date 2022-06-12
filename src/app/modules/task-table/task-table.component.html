@@ -4,7 +4,7 @@
     users: users$ | async
 } as async">
 
-<div class="task-table">
+<div class="task-table" *ngIf="tasks?.length">
     <tui-scrollbar class="_scroll-container">
         <div class="_scroll-content">
             <table
@@ -28,7 +28,8 @@
                             </ng-container>
                         </td>
                         <td *tuiCell="'assignee'" tuiTd class="table-column _assignee">
-                            <ng-container *ngIf="async.users | arrayProto:'find': 'id': task.assignee as user">
+                            <ng-container *ngIf="((async.users | arrayProto:'find': 'id': task.assignee)
+                                || (async.users | arrayProto: 'find': 'externalSystemId': task.assignee)) as user">
                                 <ng-container *ngTemplateOutlet="async.userTemplate; context: {data: user}"></ng-container>
                             </ng-container>
                         </td>

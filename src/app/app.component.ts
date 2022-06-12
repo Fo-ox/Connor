@@ -75,15 +75,15 @@ export class AppComponent implements OnInit, OnDestroy {
                 //         }))
                 //     ).subscribe();
 
-                // this.restApiService.loadTasks()
-                //     .pipe(
-                //         tap((tasks: TaskResponse[]) => AtomStateService.tasksState.setAtomByKey({
-                //             key: 'TASKS',
-                //             value: tasks?.map((task: TaskResponse) => {
-                //                 return ConverterHelper.convertTaskResponseToTask(task)
-                //             })
-                //         }))
-                //     ).subscribe();
+                this.restApiService.loadTasks()
+                    .pipe(
+                        tap((tasks: TaskResponse[]) => AtomStateService.tasksState.setAtomByKey({
+                            key: 'TASKS',
+                            value: tasks?.map((task: TaskResponse) => {
+                                return ConverterHelper.convertTaskResponseToTask(task)
+                            })
+                        }))
+                    ).subscribe();
 
                 // this.restApiService.loadChats(sessionUser.userId)
                 //     .pipe(

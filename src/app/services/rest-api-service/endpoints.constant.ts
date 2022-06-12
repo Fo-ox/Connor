@@ -10,7 +10,7 @@ export enum Endpoints {
     GET_DASHBOARDS = '/dashboards/getAll',
     CREATE_DASHBOARD = '/dashboards/create',
     UPDATE_DASHBOARD = '/dashboards/update',
-    GET_TASKS = '/tasks/getAll',
+    GET_TASKS = '/task/tasks',
     CREATE_TASK = '/tasks/create',
     UPDATE_TASK = '/tasks/update',
     GET_MESSAGES = '/message/getMessagesByChatId',
