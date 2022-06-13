@@ -4,12 +4,14 @@ export const MODEL_TYPE_DICTIONARY: Dictionary[] = [
     {
         key: 'randomForest',
         displayName: 'Random Forest'
-    },
-    {
-        key: 'linearRegression',
-        displayName: 'Linear Regression'
-    },
+    }
 ]
+
+// TODO: will be implemented latest
+// {
+//     key: 'linearRegression',
+//         displayName: 'Linear Regression'
+// },
 
 export const TYPE_DICTIONARY: Dictionary[] = [
     {

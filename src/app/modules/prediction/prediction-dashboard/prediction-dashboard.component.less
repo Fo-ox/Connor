@@ -62,6 +62,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         height: 100%;
+        overflow: scroll;
 
         &__table {
             flex: 1;
@@ -77,5 +78,9 @@
             padding: @items-max-space 0;
             flex: 1;
         }
+    }
+
+    ._disabled {
+        cursor: not-allowed;
     }
 }

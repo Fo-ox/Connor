@@ -1,1 +1,1 @@
-export const PREDICTION_TYPES = ['project', 'team'] as const;
+export const PREDICTION_TYPES = ['project'] as const;

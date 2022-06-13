@@ -28,6 +28,7 @@ export class PredictionDashboardComponent implements OnInit {
             preview: [this.PREDICTION_TYPES[0]],
             date: [null],
         })
+        this.formGroup.controls.date.disable();
     }
 
     ngOnInit(): void {
