@@ -139,6 +139,7 @@ export class ConverterHelper {
         return {
             id: user.id,
             externalSystemId: user.externalSystemId,
+            role: user.role,
             userInfo: {
                 firstName: user.firstName,
                 lastName: user.lastName,

@@ -10,7 +10,7 @@
         </h2>
 
         <form [formGroup]="formGroup" class="prediction-dashboard__header-tools">
-            <div class="prediction-dashboard__header-tools__filter">
+            <div class="prediction-dashboard__header-tools__filter _disabled">
                 <span class="prediction-dashboard__header-tools__filter-count"> 3 </span>
                 <svg-icon class="prediction-dashboard__header-tools__filter-icon"
                           [key]="'filter'"
@@ -29,7 +29,7 @@
                     ></tui-data-list-wrapper>
                 </tui-select>
             </div>
-            <div class="prediction-dashboard__header-tools__date">
+            <div class="prediction-dashboard__header-tools__date _disabled">
                 <tui-input-date-range
                     formControlName="date"
                     tuiUnfinishedValidator="Finish filling the field"
